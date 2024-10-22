@@ -1,49 +1,50 @@
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
+import { ChakraProvider, Container, Flex, Box, Heading, Text } from "@chakra-ui/react";
 import {
-  Dropzone,
-  Footer,
-  InfoCard,
-  Instructions,
-  Navbar,
-  SubmissionModal,
+    Navbar,
+    Footer,
+    SubmissionModal,
 } from "./components";
+import ProductEntryForm from "./components/ProductEntryForm"; // Import the form component
 import { lightTheme } from "./theme";
 
 function App() {
-  return (
-    <ChakraProvider theme={lightTheme}>
-      <DAppKitProvider
-        usePersistence
-        requireCertificate={false}
-        genesis="test"
-        nodeUrl="https://testnet.vechain.org/"
-        logLevel={"DEBUG"}
-      >
-        <Navbar />
-        <Flex flex={1}>
-          <Container
-            mt={{ base: 4, md: 10 }}
-            maxW={"container.xl"}
-            mb={{ base: 4, md: 10 }}
-            display={"flex"}
-            flex={1}
-            alignItems={"center"}
-            justifyContent={"flex-start"}
-            flexDirection={"column"}
-          >
-            <InfoCard />
-            <Instructions />
-            <Dropzone />
-          </Container>
-        </Flex>
-        <Footer />
+    return (
+        <ChakraProvider theme={lightTheme}>
+            <DAppKitProvider
+                usePersistence
+                requireCertificate={false}
+                genesis="test"
+                nodeUrl="https://testnet.vechain.org/"
+                logLevel="DEBUG"
+            >
+                <Navbar />
+                <Flex flex={1} direction="column" bg="gray.100" minHeight="100vh">
+                    <Box
+                        bg="teal.600"
+                        py={10}
+                        px={4}
+                        color="white"
+                        textAlign="center"
+                    >
+                        <Heading as="h1" size="2xl" mb={2}>
+                            Welcome to Servare
+                        </Heading>
+                        <Text fontSize="lg" maxW="600px" mx="auto">
+                            Blockchain-powered solution to reduce food waste.
+                        </Text>
+                    </Box>
 
-        {/* MODALS  */}
-        <SubmissionModal />
-      </DAppKitProvider>
-    </ChakraProvider>
-  );
+                    <Container mt={6} maxW="container.md" p={6}>
+                        <ProductEntryForm />
+                    </Container>
+
+                    <Footer />
+                    <SubmissionModal />
+                </Flex>
+            </DAppKitProvider>
+        </ChakraProvider>
+    );
 }
 
 export default App;
