@@ -12,6 +12,7 @@ import {
     useToast,
     Spinner,
 } from '@chakra-ui/react';
+
 import { FaAppleAlt, FaGlobe, FaBoxOpen, FaClipboard } from 'react-icons/fa';
 import { ethers } from 'ethers';
 
