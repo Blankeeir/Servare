@@ -28,7 +28,11 @@
     "packages/*"
   ],
   "dependencies": {
+    "@dynamic-labs/ethereum": "^3.4.4",
+    "@dynamic-labs/sdk-react-core": "^3.4.4",
+    "@openzeppelin/contracts": "^5.1.0",
     "dotenv": "^16.4.5",
-    "dotenv-flow": "^4.1.0"
+    "dotenv-flow": "^4.1.0",
+    "viem": "^2.21.35"
   }
 }
