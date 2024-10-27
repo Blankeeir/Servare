@@ -13,7 +13,7 @@ import {
   Navbar,
   // MarketPlace,
   // ProductEntryForm,
-  SubmissionModal,
+  // SubmissionModal,
 } from "./components";
 
 // import { useContract } from "./hooks/useContract";
@@ -70,7 +70,7 @@ const App = () => (
         <Footer />
 
         {/* MODALS  */}
-        <SubmissionModal />
+        {/* <SubmissionModal /> */}
       </DAppKitProvider>
     </ChakraProvider>
 );
