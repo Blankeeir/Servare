@@ -1,4 +1,4 @@
-export const EcoEarnABI = [
+export const ServareABI = [
   {
     inputs: [
       {

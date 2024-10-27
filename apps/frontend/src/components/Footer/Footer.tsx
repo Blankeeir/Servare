@@ -14,21 +14,17 @@ import { DiscordButton } from "./components/DiscordButton";
 import { TelegramButton } from "./components/TelegramButton";
 import { Socials } from "./components/Socials";
 import { PRIVACY_POLICY_LINK, TERMS_AND_CONDITIONS_LINK } from "../../const";
-import { BeBetterVeBetterIcon } from "../Icon";
+import { ServareIcon } from "../Icon";
 
 export const Footer: React.FC = () => {
   const desktopContent = (
     <VStack>
       <HStack justifyContent={"space-between"} w="full" spacing={4} my={4}>
         <Box my={14}>
-          <BeBetterVeBetterIcon
-            beBetterProps={{
+          <ServareIcon
+            ServareIconProps={{
               width: "80%",
-            }}
-            veBetterProps={{
-              width: "100%",
-            }}
-          />
+            }} size={"100"}          />
         </Box>
         <VStack spacing={4} alignItems={"flex-end"}>
           <DiscordButton />
@@ -85,14 +81,10 @@ export const Footer: React.FC = () => {
     <VStack>
       <VStack spacing={4} my={4}>
         <Box my={8}>
-          <BeBetterVeBetterIcon
-            beBetterProps={{
+        <ServareIcon
+            ServareIconProps={{
               width: "80%",
-            }}
-            veBetterProps={{
-              width: "100%",
-            }}
-          />
+            }} size={"100"}          />
         </Box>
         <VStack spacing={4} alignItems={"center"}>
           <DiscordButton />

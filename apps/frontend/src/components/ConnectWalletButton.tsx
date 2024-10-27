@@ -18,7 +18,7 @@ export const ConnectWalletButton = () => {
           leftIcon={<FaWallet />}
           data-testid="connect-wallet"
         >
-          Connect Wallet
+          Wallet Connect
         </Button>
       </Fade>
     );

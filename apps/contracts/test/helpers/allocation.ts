@@ -2,7 +2,7 @@ import { HardhatEthersSigner } from '@nomicfoundation/hardhat-ethers/signers';
 import { EcoEarn, B3TR_Mock, X2EarnRewardsPoolMock } from '../../typechain-types';
 import { ethers } from 'ethers';
 
-export const receiveAllocations = async (
+export  receiveAllocations = async (
     mugshot: EcoEarn,
     token: B3TR_Mock,
     owner: HardhatEthersSigner,

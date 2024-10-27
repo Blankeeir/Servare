@@ -16,7 +16,7 @@ export class OpenAIHelper {
   private createOpenAIInstance = () =>
     new OpenAI({
       apiKey: OPENAI_API_KEY,
-      dangerouslyAllowBrowser: true, // TODO: Check if this is necessary
+      dangerouslyAllowBrowser: true, // Required for browser usage
     });
 
   public askChatGPTAboutImage = async ({ base64Image, maxTokens = 350, prompt }: { base64Image: string; prompt: string; maxTokens?: number }) =>

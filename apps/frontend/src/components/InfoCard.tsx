@@ -42,7 +42,7 @@ export const InfoCard = () => {
                   mt={{ base: 2, md: 0 }}
                   ml={{ base: 0, md: 2 }}
                 >
-                  Github repository
+                  Github Repo
                 </Button>
               </Link>
             </Flex>

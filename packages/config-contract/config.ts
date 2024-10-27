@@ -1,4 +1,5 @@
 export const config = {
+  // TODO: Update this with the actual contract address
   "TOKEN_ADDRESS": "0x0dd62dac6abb12bd62a58469b34f4d986697ef19",
   "CONTRACT_ADDRESS": "0xf2443d37e05d8797a6ac614843d20442327c0b6a",
   "X2EARN_REWARDS_POOL": "0x5F8f86B8D0Fa93cdaE20936d150175dF0205fB38",
