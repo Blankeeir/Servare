@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { lightThemeColors } from "./colors";
+import { darkThemeColors } from "./colors";
 import { cardTheme } from "./card";
 import { ButtonStyle } from "./button";
 
@@ -25,7 +26,6 @@ const themeConfig = {
   },
   colors: {
     //dynamic primary coor based on the light/dark
-
     green: {
       "50": "#f3f9f3",
       "100": "#cfe6d0",
@@ -44,4 +44,9 @@ const themeConfig = {
 export const lightTheme = extendTheme({
   ...themeConfig,
   colors: lightThemeColors,
+});
+
+export const darkTheme = extendTheme({
+  ...themeConfig,
+  colors: darkThemeColors,
 });

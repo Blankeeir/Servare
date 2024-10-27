@@ -8,7 +8,8 @@ export const config = {
   "CYCLE_DURATION": 60480,
   "MAX_SUBMISSIONS_PER_CYCLE": 10
 };
-export const ECO_SOL_ABI = [
+
+export const SERVARE_SOL_ABI = [
   {
     "inputs": [
       {

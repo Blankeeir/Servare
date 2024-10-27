@@ -1,21 +1,32 @@
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
-import {
-  Dropzone,
-  Footer,
-  InfoCard,
-  Instructions,
-  Navbar,
-  SubmissionModal,
-} from "./components";
+// import { ThemeProvider, CssBaseline } from '@mui/material';
 import { lightTheme } from "./theme";
 import { DynamicContextProvider, DynamicWidget } from '@dynamic-labs/sdk-react-core';
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 
+import {
+  Dropzone,
+  Footer,
+  InfoCard,
+  Instructions, 
+  Navbar,
+  // MarketPlace,
+  // ProductEntryForm,
+  SubmissionModal,
+} from "./components";
+
+// import { useContract } from "./hooks/useContract";
+// import { 
+//     SERVARE_NFT_ADDRESS,
+//     DYNAMIC_ENV_ID ,
+//     VECHAIN_NODE_URL
+//   } from "./const";
+
+
 
 const App = () => (
     <ChakraProvider theme={lightTheme}>
-
       <DAppKitProvider
         usePersistence
         requireCertificate={false}
@@ -32,6 +43,14 @@ const App = () => (
       >
         <DynamicWidget />
       </DynamicContextProvider>
+      <main className="flex-1 container mx-auto px-4 py-8">
+              <div className="max-w-7xl mx-auto space-y-8">
+                <InfoCard />
+                <Instructions />
+                {/* <ProductEntryForm /> */}
+                <Dropzone />
+              </div>
+            </main>
         <Flex flex={1}>
           <Container
             mt={{ base: 4, md: 10 }}

@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import {ReentrancyGuard} from "@openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol";
+import {AccessControl} from "@openzeppelin-contracts/contracts/access/AccessControl.sol";
+
 // Marketplace Contract
 contract SurfoodMarketplace is ReentrancyGuard, AccessControl {
     using Counters for Counters.Counter;

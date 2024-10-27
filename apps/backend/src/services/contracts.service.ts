@@ -1,6 +1,6 @@
 import { HttpException } from '@/exceptions/HttpException';
 import { Submission } from '@/interfaces/submission.interface';
-import { ecoEarnContract } from '@/utils/thor';
+import { servareContract } from '@/utils/thor';
 import { Service } from 'typedi';
 import * as console from 'node:console';
 import { unitsUtils } from '@vechain/sdk-core';
@@ -11,7 +11,7 @@ export class ContractsService {
     let isSuccess = false;
     try {
       const result = await (
-        await ecoEarnContract.transact.registerValidSubmission(submission.address, unitsUtils.parseUnits(REWARD_AMOUNT, 'ether'))
+        await servareContract.transact.registerValidSubmission(submission.address, unitsUtils.parseUnits(REWARD_AMOUNT, 'ether'))
       ).wait();
       isSuccess = !result.reverted;
     } catch (error) {
@@ -22,7 +22,7 @@ export class ContractsService {
   }
 
   public async validateSubmission(submission: Submission): Promise<void> {
-    const isMaxSubmissionsReached = (await ecoEarnContract.read.isUserMaxSubmissionsReached(submission.address))[0];
+    const isMaxSubmissionsReached = (await servareContract.read.isUserMaxSubmissionsReached(submission.address))[0];
     if (Boolean(isMaxSubmissionsReached) === true) throw new HttpException(409, `EcoEarn: Max submissions reached for this cycle`);
   }
 }
