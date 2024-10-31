@@ -16,7 +16,7 @@ interface FormFileUploadProps {
 export const FormFileUpload: React.FC<FormFileUploadProps> = ({
   name,
   control,
-  label,
+//   label,
   rules,
   accept,
   maxSize,

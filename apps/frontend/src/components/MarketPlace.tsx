@@ -15,12 +15,13 @@ import {
 } from '@chakra-ui/react';
 import { Search, Filter, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useProduct } from './hooks/useProduct';
+import { useProducts } from '../hooks/useProduct';
 import { ProductCard } from './ProductCard';
-import { ProductDetailModal } from './ProductDetailModal';
+import {Product} from '../util/types';
+// import { ProductDetailModal } from './ProductDetailModal';
 import { FilterDrawer } from './FilterDrawer';
 
-const MotionGrid = motion(SimpleGrid);
+const MotionGrid = motion.custom(SimpleGrid);
 
 export const Marketplace: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -30,7 +31,11 @@ export const Marketplace: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const filterDrawer = useDisclosure();
 
-  const filteredProducts = products?.filter(product => {
+  const filteredProducts = products?.filter((product: {
+      name: any;
+      description: any;
+      category: string;type: Product
+}) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
@@ -113,9 +118,10 @@ export const Marketplace: React.FC = () => {
       />
 
       <FilterDrawer
-        isOpen={filterDrawer.isOpen}
-        onClose={filterDrawer.onClose}
-      />
+              isOpen={filterDrawer.isOpen}
+              onClose={filterDrawer.onClose} onApplyFilters={function (filters: any): void {
+                  throw new Error('Function not implemented.');
+              } }      />
     </Box>
   );
 };
@@ -124,7 +130,7 @@ export const Marketplace: React.FC = () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { filters, setFilters, applyFilters } = useProductFilters();
-    const { products, isLoading } = useProducts();
+    const { products, isLoading } = useProduct();
   
     const filteredProducts = useMemo(() => {
       if (!products) return [];

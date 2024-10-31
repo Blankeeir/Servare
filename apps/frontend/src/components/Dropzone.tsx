@@ -4,7 +4,7 @@ import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import { ScanIcon } from "./Icon";
 import { blobToBase64, getDeviceId, resizeImage } from "../util";
 import { useWallet } from "@vechain/dapp-kit-react";
-import { submitReceipt } from "../networking";
+// import { submitReceipt } from "../networking";
 import { useDisclosure, useSubmission } from "../hooks";
 
 export const Dropzone = () => {
@@ -45,21 +45,21 @@ export const Dropzone = () => {
 
       const deviceID = await getDeviceId();
 
-      try {
-        const response = await submitReceipt({
-          address: account,
-          deviceID,
-          image: base64Image,
-        });
+      // try {
+      //   const response = await submitReceipt({
+      //     address: account,
+      //     deviceID,
+      //     image: base64Image,
+      //   });
 
-        console.log(response);
+      //   console.log(response);
 
-        setResponse(response);
-      } catch (error) {
-        alert("Error submitting receipt");
-      } finally {
-        setIsLoading(false);
-      }
+      //   setResponse(response);
+      // } catch (error) {
+      //   alert("Error submitting receipt");
+      // } finally {
+      //   setIsLoading(false);
+      // }
     },
     [account, onOpen, setIsLoading, setResponse],
   );

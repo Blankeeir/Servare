@@ -14,8 +14,6 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Button,
-  Box,
   Text,
   Icon,
   useColorModeValue,
@@ -25,14 +23,14 @@ import { motion } from 'framer-motion';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Upload, AlertCircle, Check } from 'lucide-react';
+import { AlertCircle, Check } from 'lucide-react';
 import { useVeChain } from '../../hooks/useVeChain';
 import { useToast } from '../../hooks/useToast';
-import { useTransactionHandler } from '../hooks/useTransactionHandler';
-import { useContract } from '../hooks/useContract';
+import { useTransactionHandler } from '../../hooks/useTransaction';
+import { useContract } from '../../hooks/useContract';
 import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { Dropzone } from '../Dropzone';
-import { SERVARE_NFT_ADDRESS } from '../constants';
+import { SERVARE_NFT_ADDRESS } from '../../const';
 import { uploadToIPFS } from '../utils/ipfs';
 
 // Form validation schema
@@ -68,7 +66,9 @@ const productSchema = z.object({
 
 type ProductFormData = z.infer<typeof productSchema>;
 
-const MotionVStack = motion(VStack);
+import { chakra } from '@chakra-ui/react';
+
+const MotionVStack = motion(chakra(VStack));
 
 export const ProductEntryForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -139,9 +139,9 @@ export const ProductEntryForm: React.FC = () => {
       );
 
       reset();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error('Failed to create product', {
-        description: error.message,
+        description: (error as Error).message,
       });
     } finally {
       setIsSubmitting(false);

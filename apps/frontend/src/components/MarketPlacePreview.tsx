@@ -1,13 +1,19 @@
 // components/MarketplacePreview.tsx
 import React from 'react';
 import { Box, Button, Text, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useProducts } from '../hooks/useProducts';
-import { ProductCard } from './ProductCard';
-import { AnimatedContainer } from './animations/AnimatedContainer';
+import { useProducts } from '../hooks/useProduct';
+import { ProductCard} from './ProductCard';
+import { Product } from '../util/types';
+import { AnimatedContainer } from './Animations/AnimatedContainer';
 
-const MotionBox = motion(Box);
+import { BoxProps } from '@chakra-ui/react';
+import { motion, isValidMotionProp } from 'framer-motion';
+import {chakra, shouldForwardProp} from '@chakra-ui/react'
+const MotionBox = chakra(motion.div, {
+    shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+  });
+
 
 export const MarketplacePreview: React.FC = () => {
   const navigate = useNavigate();
@@ -42,13 +48,15 @@ export const MarketplacePreview: React.FC = () => {
               />
             ))
           ) : (
-            products?.slice(0, 6).map((product) => (
+            products?.slice(0, 6).map((product: Product) => (
               <MotionBox
                 key={product.id}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
               >
-                <ProductCard product={product} />
+                <ProductCard product={product} onClick={function (): void {
+                        throw new Error('Function not implemented.');
+                    } } />
               </MotionBox>
             ))
           )}

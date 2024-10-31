@@ -15,7 +15,7 @@ import {
   RangeSliderTrack,
   RangeSliderFilledTrack,
   RangeSliderThumb,
-  Checkbox,
+//   Checkbox,
   Radio,
   RadioGroup,
   Button,
@@ -35,19 +35,44 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import { FilterIcon, RefreshCcw } from 'lucide-react';
+type Filter = {
+    priceRange: [number, number];
+    qualityScore: [number, number];
+    categories: string[];
+    listingType: 'all' | 'fixed' | 'auction';
+    carbonFootprint: [number, number];
+    location: string;
+    verificationStatus: 'all' | 'verified' | 'unverified';
+    expiryDateRange: [string, string];
+    sortBy: 'newest' | 'oldest' | 'price_low' | 'price_high' | 'quality_high' | 'expiry_soon';
+};
 
 interface FilterDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  onApplyFilters: (filters: any) => void;
-  currentFilters?: any;
+  onApplyFilters: (filters: Filter ) => void;
+
+  currentFilters?: Filter;
 }
 
 export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   isOpen,
   onClose,
   onApplyFilters,
-  currentFilters = {}
+  currentFilters = {
+    priceRange: [0, 1000],
+    qualityScore: [0, 100],
+    categories: [],
+    listingType: 'all',
+    carbonFootprint: [0, 100],
+    location: '',
+    verificationStatus: 'all',
+    expiryDateRange: [
+      new Date().toISOString().split('T')[0],
+      new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0]
+    ],
+    sortBy: 'newest'
+  }
 }) => {
   const [filters, setFilters] = useState({
     priceRange: currentFilters.priceRange || [0, 1000],
@@ -77,7 +102,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
     setFilters(prev => ({
       ...prev,
       categories: prev.categories.includes(category)
-        ? prev.categories.filter(c => c !== category)
+        ? prev.categories.filter((c: string) => c !== category)
         : [...prev.categories, category]
     }));
   };
@@ -201,7 +226,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
               <FormLabel>Listing Type</FormLabel>
               <RadioGroup
                 value={filters.listingType}
-                onChange={value => setFilters(prev => ({ ...prev, listingType: value }))}
+                onChange={value => setFilters(prev => ({ ...prev, listingType: value as 'all' | 'fixed' | 'auction' }))}
               >
                 <HStack spacing={4}>
                   <Radio value="all">All</Radio>
@@ -218,7 +243,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
               <FormLabel>Quality Score</FormLabel>
               <RangeSlider
                 value={filters.qualityScore}
-                onChange={value => setFilters(prev => ({ ...prev, qualityScore: value }))}
+                onChange={(value: [number, number]) => setFilters(prev => ({ ...prev, qualityScore: value }))}
                 min={0}
                 max={100}
                 step={1}
@@ -259,7 +284,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
                 value={filters.verificationStatus}
                 onChange={value => setFilters(prev => ({ 
                   ...prev, 
-                  verificationStatus: value 
+                  verificationStatus: value as 'all' | 'verified' | 'unverified' 
                 }))}
               >
                 <VStack align="start">
@@ -279,7 +304,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
                 value={filters.sortBy}
                 onChange={e => setFilters(prev => ({ 
                   ...prev, 
-                  sortBy: e.target.value 
+                  sortBy: e.target.value as 'newest' | 'oldest' | 'price_low' | 'price_high' | 'quality_high' | 'expiry_soon'
                 }))}
               >
                 <option value="newest">Newest First</option>

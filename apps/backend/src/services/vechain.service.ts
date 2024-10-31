@@ -2,10 +2,9 @@
 import { Framework } from '@vechain/connex-framework';
 
 import { Driver, SimpleNet } from '@vechain/connex-driver';
-import { ethers } from 'ethers';
-import { ServareMarketplaceAbi, } from '../../../contracts/contracts/abi/ServareMarketPlace.abi';
-import {SupplyChainTrackingAbi } from '../../../contracts/contracts/abi/SupplyChainTracking.abi';
-import {ServareNFTAbi} from '../../../contracts/contracts/abi/ServareNFT.abi';
+import { ServareMarketplaceAbi } from '../../../contracts/contracts/abi/ServareMarketPlace.abi';
+import { SupplyChainTrackingAbi } from '../../../contracts/contracts/abi/SupplyChainTracking.abi';
+import { ServareNFTAbi } from '../../../contracts/contracts/abi/ServareNFT.abi';
 import { config } from '../config';
 
 export class VeChainService {
@@ -18,12 +17,12 @@ export class VeChainService {
   };
 
   private constructor() {
-    const driver = new Driver(new SimpleNet(config.vechain.nodeUrl),this.connex.thor.genesis);
+    const driver = new Driver(new SimpleNet(config.vechain.nodeUrl), this.connex.thor.genesis);
     this.connex = new Framework(driver);
     this.contracts = {
-      nft: this.connex.thor.account(config.contracts.nft).abi(ServareNFTAbi),
-      marketplace: this.connex.thor.account(config.contracts.marketplace).abi(ServareMarketplaceAbi),
-      supplyChain: this.connex.thor.account(config.contracts.supplyChain).abi(SupplyChainTrackingAbi)
+      nft: this.connex.thor.account(config.contracts.nft).method(ServareNFTAbi),
+      marketplace: this.connex.thor.account(config.contracts.marketplace).method(ServareMarketplaceAbi),
+      supplyChain: this.connex.thor.account(config.contracts.supplyChain).method(SupplyChainTrackingAbi),
     };
   }
 
@@ -136,7 +135,7 @@ export class VeChainService {
   }
 
   private formatProductData(data: any) {
-    const {utils, BigNumber} = require('ethers');
+    const { utils } = require('ethers');
 
     return {
       name: data.name,
@@ -152,7 +151,7 @@ export class VeChainService {
       producer: data.producer,
       isVerified: data.isVerified,
       carbonFootprint: data.carbonFootprint.toString(),
-      qualityScore: data.qualityScore.toString()
+      qualityScore: data.qualityScore.toString(),
     };
   }
 
@@ -164,7 +163,7 @@ export class VeChainService {
       handler: event.handler,
       temperature: event.temperature,
       humidity: event.humidity,
-      additionalDataHash: event.additionalDataHash
+      additionalDataHash: event.additionalDataHash,
     }));
   }
 
@@ -174,12 +173,12 @@ export class VeChainService {
       verifier: verification.verifier,
       verificationType: verification.verificationType,
       isVerified: verification.isVerified,
-      notes: verification.notes
+      notes: verification.notes,
     }));
   }
 
   private formatListing(listing: any) {
-    const {utils, BigNumber} = require('ethers');
+    const { utils } = require('ethers');
     return {
       tokenId: listing.tokenId.toString(),
       seller: listing.seller,
@@ -195,10 +194,12 @@ export class VeChainService {
 
   // Event listeners
   subscribeToEvents(eventName: string, callback: (event: any) => void) {
-    const eventFilter = this.connex.thor.filter('event', this.getEventCriteria(eventName));
+    const eventFilter = this.connex.thor.filter('event', [this.getEventCriteria(eventName)]);
 
-    return eventFilter.apply(0, 'best', event => {
-      callback(this.formatEvent(eventName, event));
+    return eventFilter.apply(0, Number.MAX_SAFE_INTEGER).then((events: any) => {
+      events.forEach((event: any) => {
+        callback(this.formatEvent(eventName, event));
+      });
     });
   }
 
@@ -216,7 +217,7 @@ export class VeChainService {
   }
 
   private formatEvent(eventName: string, event: any) {
-    const {utils, BigNumber} = require('ethers');
+    const { utils } = require('ethers');
     // Format event data based on event type
     switch (eventName) {
       case 'ProductCreated':

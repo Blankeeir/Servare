@@ -1,11 +1,12 @@
 // apps/frontend/src/hooks/useTransactions.ts
 import { useState, useEffect } from 'react';
 import { useVeChain } from './useVeChain';
-import { FormattingUtils } from '@servare/util';
+import { FormattingUtils } from '@repo/utils';
+import {Transaction} from '../util/types';
 
 export const useTransactions = (address?: string) => {
   const { connex } = useVeChain();
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +17,9 @@ export const useTransactions = (address?: string) => {
         setLoading(true);
         const events = await connex.thor
           .account(address)
-          .getPastEvents();
+          .event({ name: 'transfer' })
+          .filter([{ range: { unit: 'block', from: 0, to: 'best' } }])
+          .apply(0, Number.MAX_SAFE_INTEGER);
 
         const formattedTransactions = events.map(event => ({
           id: event.meta.blockNumber + '-' + event.meta.txID,

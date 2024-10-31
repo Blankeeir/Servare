@@ -1,172 +1,224 @@
-# Servare
-A decentralized surplus food trading and tracking marketplace with AI powered match making and logistics optimization
+# Servare 
+## Best Marketplace For addressing wasted Food
 
-Read more about the implementation and key features of this template in our [Developer Docs](https://docs.vebetterdao.org/developer-guides/integration-examples/pattern-2-use-smart-contracts-and-backend).
+<p align="center">
+  <img src="apps/frontend/public/icon.png" alt="Servare Logo" width="200"/>
+</p>
 
-This template uses the VeBetterDAO ecosystem to distribute rewards to users. To learn more about VeBetterDAO, visit our [documentation](https://docs.vebetterdao.org/developer-guides/integration-examples).
+<!-- <h1 align="center">Servare</h1> -->
 
-When using the solo node you can import the following mnemonic into your wallet and have access to 10 pre-funded accounts:
+<p align="center">
+  <strong>A Blockchain-Based Supply Chain tracking &  Marketplace Platform for surplus food </strong>
+</p>
 
-```
-denial kitchen pet squirrel other broom bar gas better priority spoil cross
-```
+<p align="center">
+  <a href="#installation">Installation</a> •
+  <a href="#features">Features</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
+</p>
 
-## Environmental Setup
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+  <img src="https://img.shields.io/badge/node->=16.0.0-brightgreen.svg" alt="Node"/>
+  <img src="https://img.shields.io/badge/typescript-^4.9.0-blue.svg" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/solidity-^0.8.28-brightgreen.svg" alt="Solidity"/>
+</p>
 
-Ensure your development environment is set up with the following:
+## 🌟 Overview
 
-- **Node.js (v18 or later):** [Download here](https://nodejs.org/en/download/package-manager) 📥
-- **Yarn:** [Install here](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) 🧶
-- **Docker (for containerization):** [Get Docker](https://docs.docker.com/get-docker/) 🐳
-- **Hardhat (for smart contracts):** [Getting Started with Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started) ⛑️
+Servare revolutionizes supply chain management by combining blockchain technology with NFT capabilities. Our platform provides end-to-end tracking, secure trading, and AI-enhanced analytics for modern supply chain solutions.
 
-## Project Structure
+## ✨ Features
 
-### Frontend (apps/frontend) 🌐
+### Supply Chain Management
+- 📦 Real-time product tracking
+- 🔍 Transparent chain of custody
+- 📊 Supply chain analytics
+- 🤖 AI-powered insights
 
-A blazing-fast React application powered by Vite:
-- **Vechain dapp-kit:** Streamline wallet connections and interactions. [Learn more](https://docs.vechain.org/developer-resources/sdks-and-providers/dapp-kit)
+### NFT Marketplace
+- 🎨 Secure token creation
+- 💱 Seamless trading platform
+- 💰 Automated royalty distribution
+- 🔐 Smart contract security
 
-### Backend (apps/backend) 🔙
+### Blockchain Integration
+- ⛓️ VeChain compatibility
+- 📝 Smart contract automation
+- 🔄 Cross-chain functionality
+- 🏷️ Dynamic NFT features
 
-An Express server crafted with TypeScript for robust API development:
+## 🛠 Tech Stack
 
-- **Vechain SDK:** Seamlessly fetch and perform transactions with the VechainThor blockchain. [Learn more](https://docs.vechain.org/developer-resources/sdks-and-providers/sdk)
-- **OpenAI GPT-4o:** Integrate image analysis capabilities. [Explore here](https://platform.openai.com/docs/guides/vision)
-
-### Contracts (apps/contracts) 📜
-
-Smart contracts in Solidity, managed with Hardhat for deployment on the Vechain Thor network.
-
-### Packages 📦
-
-Shared configurations and utility functions to unify and simplify your development process.
-
-## Environment Variables ⚙️
-
-Configure your environment variables for seamless integration:
+### Frontend
+- React.js with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- Web3 integration
 
 ### Backend
+- Node.js with TypeScript
+- Express.js framework
+- OpenAI integration
+- RESTful API design
 
-Store your environment-specific `.env` files in `apps/backend`. `.env.development.local` & `.env.production.local` allow for custom environment variables based on the environment:
+### Blockchain
+- Solidity smart contracts
+- VeChain integration
+- Hardhat development environment
+- OpenZeppelin contracts
 
-- **OPENAI_API_KEY:** [Get your GPT-4 OpenAI key](https://platform.openai.com/api-keys) (Enable GPT-4 [here](https://help.openai.com/en/articles/7102672-how-can-i-access-gpt-4-gpt-4-turbo-and-gpt-4o))
+## 🏗 Architecture
 
-### Contracts
-
-Manage deployment parameters and network configurations in `hardhat.config.js` under `apps/contracts`:
-
-- **MNEMONIC:** Mnemonic of the deploying wallet
-  
+```mermaid
+graph TD
+    A[Frontend] --> B[Backend API]
+    B --> C[Smart Contracts]
+    C --> D[VeChain Blockchain]
+    B --> E[OpenAI Service]
+    C --> F[IPFS Storage]
 ```
-denial kitchen pet squirrel other broom bar gas better priority spoil cross
-```
 
-## Getting Started 🏁
+## 📦 Installation
 
-Clone the repository and install dependencies with ease:
-
+1. **Clone the repository**
 ```bash
-yarn install # Run this at the root level of the project
+git clone https://github.com/yourusername/servare.git
+cd servare
 ```
 
-### Run locally
-
-#### Deploy contracts
-
-To start deploying contract locally you must run a local instance of the Vechain Thor blockchain. You can do this by running the following command:
-
+2. **Install dependencies**
 ```bash
-yarn contracts:solo-up
+yarn install
 ```
 
-This command will also start a local instance of the tools Insight (http://localhost:8080/) and Inspector (http://localhost:8081/).
-
-At this point you can deploy the contracts to the local network by running:
-
+3. **Set up environment variables**
 ```bash
-yarn contracts:deploy:solo
+cp .env.example .env
+# Edit .env with your configuration
 ```
 
-Once the deployment is completed successfully you can go ahead and start the frontend and backend:
-
-> ⚠️ **Warning:**
-> Remember to set the OPENAI_API_KEY env variable in the backend .env.development.local file. 
-
+4. **Start development servers**
 ```bash
+# Start backend
+cd apps/backend
+yarn dev
+
+# Start frontend
+cd ../frontend
 yarn dev
 ```
-## Summary
-```shell
-yarn set version classic
-yarn install
-yarn contracts:solo-up
-yarn contracts:deploy:solo
 
-OPENAI_API_KEY="Your Api Key"
-ADMIN_MNEMONIC="denial kitchen pet squirrel other broom bar gas better priority spoil cross" 
- yarn dev
+## 🔧 Configuration
+
+### Backend
+```env
+NODE_ENV=development
+PORT=3001
+MONGODB_URI=mongodb://localhost:27017/servare
+OPENAI_API_KEY=your_api_key
 ```
 
-At this point you can access the frontend at [http://localhost:8082/](http://localhost:8082/).
+### Frontend
+```env
+VITE_API_URL=http://localhost:3001
+VITE_CHAIN_ID=1
+VITE_MARKETPLACE_ADDRESS=0x...
+```
 
+### Blockchain
+```env
+ETHERSCAN_API_KEY=your_api_key
+PRIVATE_KEY=your_private_key
+VECHAIN_NODE_URL=https://your.node.url
+```
 
+## 📚 Documentation
 
-## Deploying on Testnet 🚀
+### API Endpoints
 
-To distribute rewards this contract needs of a valid APP_ID provided by VeBetterDAO when joining the ecosystem.
-In testnet you can generate the APP_ID by using the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/).
-This contract can be initially deployed without this information and DEFAULT_ADMIN_ROLE can update it later through {EcoEarn-setAppId}.
+```
+POST   /api/submission      # Submit new product/NFT
+GET    /api/tracking/:id    # Get tracking information
+POST   /api/marketplace     # List item on marketplace
+```
 
-This contract must be set as a `rewardDistributor` inside the X2EarnApps contract to be able to send rewards to users and withdraw.
+### Smart Contract Interfaces
 
-For deploying on Testnet you should check that you have the correct addresses in the `config-contracts` package (generated on the [VeBetterDAO sandbox](https://dev.testnet.governance.vebetterdao.org/)).
+```solidity
+interface IServareNFT {
+    function mint(address to, string memory uri) external returns (uint256);
+    function tokenURI(uint256 tokenId) external view returns (string memory);
+}
+```
 
-When deploying on the SOLO network the script will deploy for you the mocked VeBetterDAO contracts and generate an APP_ID.
-
-Once everything is set up you can deploy the contracts to the testnet by running:
+## 🧪 Testing
 
 ```bash
-yarn contracts:deploy:testnet
+# Run all tests
+yarn test
+
+# Run specific test suite
+yarn test:contracts    # Smart contract tests
+yarn test:frontend     # Frontend component tests
+yarn test:backend      # Backend API tests
 ```
 
-## Result
+## 🚀 Deployment
 
-Link | Service 
---- | ---
-http://localhost:8082 | Frontend
-http://localhost:3000 | Backend
-http://localhost:8081 | Inspector
-http://localhost:8669 | Solo Thor
-
-Deployed contracts documented in: [packages/config-contract/config.ts](packages/config-contract/config.ts)
-
-## Shutdown
-
-```shell
-yarn contracts:solo-down
+### Smart Contracts
+```bash
+yarn deploy:contracts
+yarn verify:contracts
 ```
 
+### Backend
+```bash
+yarn build
+yarn start
+# Or using Docker
+docker-compose up -d
+```
 
-### Testnet
+### Frontend
+```bash
+yarn build
+yarn preview
+```
 
-Read the [VeBetterDAO documentation](https://docs.vebetterdao.org/developer-guides/test-environmnet) to learn how to set up rewards for your users and use the Testnet environment.
+## 🤝 Contributing
 
-Test environment: [https://dev.testnet.governance.vebetterdao.org/](https://dev.testnet.governance.vebetterdao.org/)
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-[TEST ENVIRONMENT DEMO](https://streamable.com/e/175r1s?quality=highest)
+## 🔒 Security
 
-Thanks to the test environment you will be able to mint and deposit B3TR tokens int the rewards pool that you will use to distribute rewards to users.
+- Smart contract audited by [Audit Firm]
+- Regular security assessments
+- OpenZeppelin security standards
+- Rate limiting and input validation
 
-Now you just need to trigger cycles and set amount of rewards per cycle on your EcoEarn contract.
+## 📄 License
 
-1. Go to our online [inspector app](https://solid-funicular-1wmop55.pages.github.io/#/contracts) that you can use to interact with your contracts. Be sure to select the correct network (Testnet).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-2. Add the `ServareMarketplace` contract to the inspector app. Get the address from `config-contracts` package and the ABI from the `apps/contracts/artifacts/contracts/ServareMarketplace.sol/ServareMarketplace.json` file.
-   ![image](https://i.ibb.co/TK8519c/SCR-20240723-kjid.png)
+## 👥 Team
 
-3. Set how many rewards you want to distribute per cycle:
-   ![image](https://i.ibb.co/qpJnL5x/SCR-20240723-kkti.png)
+- [Lead Developer](https://github.com/username)
+- [Smart Contract Developer](https://github.com/username)
+- [Frontend Developer](https://github.com/username)
+- [Backend Developer](https://github.com/username)
 
-4. Trigger a cycle:
-   ![image](https://i.ibb.co/47V2Zjb/SCR-20240723-kkxx.png)
+## 📞 Support
+
+For support:
+- 📧 Email: support@servare.com
+- 💬 Discord: [Join our community](https://discord.gg/servare)
+- 📱 Telegram: [@servare](https://t.me/servare)

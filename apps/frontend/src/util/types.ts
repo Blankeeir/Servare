@@ -10,7 +10,7 @@ export interface SupplyChainEvent {
     timestamp: number;
   }
   
-  export interface Verification {
+export interface Verification {
     verificationType: string;
     isVerified: boolean;
     notes: string;
@@ -18,6 +18,8 @@ export interface SupplyChainEvent {
   }
 
 export interface Product {
+    id: string;
+    imageUrl: string;
     name: string;
     description: string;
     quantity: number;
@@ -78,4 +80,14 @@ export interface TrackingData {
   export const enum ListingType {
     FixedPrice = 0,
     Auction = 1
+  }
+
+  export interface Transaction {
+    id: string;
+    hash: string;
+    block: number;
+    timestamp: number;
+    from: string;
+    to: string;
+    value: string;
   }

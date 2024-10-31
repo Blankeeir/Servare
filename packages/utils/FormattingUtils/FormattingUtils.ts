@@ -133,6 +133,16 @@ function roundDownSignificantDigits(numbers: number, decimals: number = 0) {
   return Math.floor(numbers * scaleFactor) / scaleFactor;
 }
 
+export const formatAddress = (
+  address: string,
+  lengthBefore = 4,
+  lengthAfter = 10,
+): string => {
+  const before = address.substring(0, lengthBefore);
+  const after = address.substring(address.length - lengthAfter);
+  return `${before}…${after}`;
+};
+
 export const humanNumber = (
   formattedValue: BigNumber.Value,
   originalValue?: BigNumber.Value,

@@ -1,7 +1,7 @@
 // apps/frontend/src/hooks/useProducts.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { productService } from '../services/api';
-import { ProductFormData } from '../schemas/validation';
+import { ProductFormData } from ',,/schemas/validation.ts';
 import { useToast } from '@chakra-ui/react';
 
 export const useProducts = (filters?: Record<string, any>) => {
@@ -12,13 +12,11 @@ export const useProducts = (filters?: Record<string, any>) => {
     data: products,
     isLoading,
     error
-  } = useQuery(
-    ['products', filters],
-    () => productService.getProducts(filters),
-    {
-      staleTime: 1 * 60 * 1000, // 1 minute
-    }
-  );
+  } = useQuery({
+    queryKey: ['products', filters],
+    queryFn: () => productService.getProducts(filters),
+    staleTime: 1 * 60 * 1000, // 1 minute
+  });
 
   const createProduct = useMutation(
     (productData: ProductFormData) => productService.createProduct(productData),

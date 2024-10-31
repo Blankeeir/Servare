@@ -13,7 +13,17 @@ import { motion } from 'framer-motion';
 
 const MotionBox = motion(Box);
 
-export const ProductCard: React.FC<{ product: any; onClick: () => void }> = ({
+interface Product {
+  imageUrl: string;
+  name: string;
+  category: string;
+  price: number;
+  description: string;
+  quantity: number;
+  location: string;
+}
+
+export const ProductCard: React.FC<{ product: Product; onClick: () => void }> = ({
   product,
   onClick,
 }) => {
