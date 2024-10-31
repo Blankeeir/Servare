@@ -1,7 +1,7 @@
 // apps/frontend/src/components/ProductCard.tsx
 import React from 'react';
 import {
-  Box,
+  // Box,
   Image,
   Text,
   Badge,
@@ -9,9 +9,15 @@ import {
   HStack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { motion, MotionProps } from 'framer-motion';
+import { isValidMotionProp } from 'framer-motion';
+import { chakra, BoxProps } from '@chakra-ui/react';
+import { shouldForwardProp } from '@chakra-ui/react';
 
-const MotionBox = motion(Box);
+const MotionBox = chakra(motion.div, {
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+}) as React.FC<BoxProps & MotionProps>;
 
 interface Product {
   imageUrl: string;
@@ -36,7 +42,7 @@ export const ProductCard: React.FC<{ product: Product; onClick: () => void }> = 
       overflow="hidden"
       shadow="md"
       whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
+      // transition={{ duration: 0.2 }}
       cursor="pointer"
       onClick={onClick}
     >

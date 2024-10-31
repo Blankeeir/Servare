@@ -23,7 +23,7 @@ import {
 
 import { useSubmission } from '../hooks/useSubmission';
 import { AnimatedContainer } from './Animations/AnimatedContainer';
-import { FormattingUtils } from '@repo/utils';
+// import { FormattingUtils } from '@repo/utils';
 
 interface SubmissionModalProps {
   isOpen: boolean;
@@ -62,7 +62,7 @@ export const SubmissionModal: React.FC<SubmissionModalProps> = ({
     }
     if (typeof value === 'number') {
       if (key.toLowerCase().includes('price')) {
-        return `${FormattingUtils.formatAmount(value)} VET`;
+        return `${value} VET`;
       }
       return value.toString();
     }

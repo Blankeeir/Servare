@@ -15,50 +15,65 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Text,
-  Icon,
+  // Icon,
   useColorModeValue,
+  // Button,
+  Box,
+  // shouldForwardProp,
 } from '@chakra-ui/react';
-
 import { motion } from 'framer-motion';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { AlertCircle, Check } from 'lucide-react';
+// import { z } from 'zod';
+import { chakra } from '@chakra-ui/react';
+
+// Import your actual hooks and constants
 import { useVeChain } from '../../hooks/useVeChain';
 import { useToast } from '../../hooks/useToast';
-import { useTransaction } from '../../hooks/useTransaction';
+import { useTransactions } from '../../hooks/useTransactions';
 import { useContract } from '../../hooks/useContract';
 import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { Dropzone } from '../Dropzone';
 import { SERVARE_NFT_ADDRESS } from '../../const';
-import { uploadToIPFS } from '../utils/ipfs';
+import { Product as ProductFormData } from '../../util/types';
+import {uploadToIPFS} from '../../util/ipfs';
+import { productSchema } from '../../schemas';
 
-import { ButtonStyle } from '../../theme/button';
-import {productSchema} from '../../schemas';
 
 
-type ProductFormData = z.infer<typeof productSchema>;
-
-import { chakra } from '@chakra-ui/react';
-
-const MotionVStack = motion(chakra(VStack));
+// const MotionVStack = chakra(motion.div, {
+//   shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+// });
+import { forwardRef } from 'react';
+import ServareNFTABI from '../../../../contracts/abi/SurfoodNFT.json';
+// import SupplyChainTrackingAbi from '../../../contracts/abi/SupplyChainTracking.json';
+import { AbiItem } from 'web3-utils';
+const MotionButton = motion(forwardRef<HTMLButtonElement, React.ComponentPropsWithoutRef<'button'> & { colorScheme?: string, size?: string }>((props, ref) => <chakra.button ref={ref} {...props} />));
 
 export const ProductEntryForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [, setIsUploading] = useState(false);
   const toast = useToast();
-  const handleTransaction = useTransactionHandler();
+  const { handleTransaction } = useTransactions();
   const { account } = useVeChain();
-  const nftContract = useContract('ServareNFT', SERVARE_NFT_ADDRESS);
+
+  const nftContract = useContract('ServareNFT', SERVARE_NFT_ADDRESS, ServareNFTABI.abi as AbiItem[]);
   const bgColor = useColorModeValue('white', 'gray.700');
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
+    // setValue,
   } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
     mode: 'onChange',
+    defaultValues: {
+      quantity: 1,
+      price: 0,
+      carbonFootprint: 0,
+    },
   });
 
   const onSubmit = async (data: ProductFormData) => {
@@ -67,11 +82,20 @@ export const ProductEntryForm: React.FC = () => {
       return;
     }
 
+    if (!nftContract) {
+      toast.error('Contract not initialized');
+      return;
+    }
+
     try {
       setIsSubmitting(true);
+      setIsUploading(true);
 
       // Upload image to IPFS
-      const imageHash = await uploadToIPFS(data.image);
+      const imageHash = await uploadToIPFS(data.imageUrl);
+      if (!imageHash) {
+        throw new Error('Failed to upload image to IPFS');
+      }
 
       // Create metadata
       const metadata = {
@@ -83,41 +107,50 @@ export const ProductEntryForm: React.FC = () => {
           location: data.location,
           category: data.category,
           carbonFootprint: data.carbonFootprint,
+          expiryDate: data.expiryDate.toString(),
+          productionDate: data.productionDate.toString(),
         },
       };
 
+      setIsUploading(false);
+
       // Upload metadata to IPFS
       const metadataHash = await uploadToIPFS(JSON.stringify(metadata));
+      if (!metadataHash) {
+        throw new Error('Failed to upload metadata to IPFS');
+      }
 
       // Create product on blockchain
-      await handleTransaction(
-        nftContract.methods.createProduct(
-          data.name,
-          data.description,
-          data.quantity,
-          data.location,
-          Math.floor(data.expiryDate.getTime() / 1000),
-          Math.floor(data.productionDate.getTime() / 1000),
-          data.category,
-          `ipfs://${imageHash}`,
-          data.price,
-          metadataHash,
-          data.carbonFootprint
-        ).send({ from: account }),
-        {
-          pendingMessage: 'Creating product...',
-          successMessage: 'Product created successfully!',
-          errorMessage: 'Failed to create product',
-        }
+      const transaction = nftContract.methods.createProduct(
+        data.name,
+        data.description,
+        data.quantity,
+        data.location,
+        Math.floor(new Date(data.expiryDate).getTime() / 1000),
+        Math.floor(new Date(data.productionDate).getTime() / 1000),
+        data.category,
+        `ipfs://${imageHash}`,
+        data.price,
+        metadataHash,
+        data.carbonFootprint
       );
 
-      reset();
+      await handleTransaction({ send: () => transaction }, {
+        pendingMessage: 'Creating product on blockchain...',
+        successMessage: 'Product created successfully!',
+        errorMessage: 'Failed to create product',
+        onSuccess: () => {
+          reset();
+        },
+      });
     } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
       toast.error('Failed to create product', {
-        description: (error as Error).message,
+        description: errorMessage,
       });
     } finally {
       setIsSubmitting(false);
+      setIsUploading(false);
     }
   };
 
@@ -130,14 +163,17 @@ export const ProductEntryForm: React.FC = () => {
       shadow="lg"
       maxW="3xl"
       mx="auto"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      style={{ transition: 'all 0.3s' }}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <MotionVStack
-          spacing={6}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.3, delay: 0.1 } as { duration: number; delay: number }}
         >
+          <VStack spacing={6}>
           <Text fontSize="2xl" fontWeight="bold">Create New Product</Text>
 
           {/* Basic Information */}
@@ -181,7 +217,7 @@ export const ProductEntryForm: React.FC = () => {
             render={({ field }) => (
               <FormControl isInvalid={!!errors.description}>
                 <FormLabel>Description</FormLabel>
-                <Textarea {...field} rows={4} />
+                <Textarea {...field} rows={4} resize="vertical" />
                 <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
               </FormControl>
             )}
@@ -197,7 +233,7 @@ export const ProductEntryForm: React.FC = () => {
                   <FormLabel>Quantity</FormLabel>
                   <NumberInput
                     value={value}
-                    onChange={(_, value) => onChange(value)}
+                    onChange={(_, valueAsNumber) => onChange(valueAsNumber)}
                     min={1}
                   >
                     <NumberInputField />
@@ -219,7 +255,7 @@ export const ProductEntryForm: React.FC = () => {
                   <FormLabel>Price (VET)</FormLabel>
                   <NumberInput
                     value={value}
-                    onChange={(_, value) => onChange(value)}
+                    onChange={(_, valueAsNumber) => onChange(valueAsNumber)}
                     min={0}
                     precision={3}
                   >
@@ -294,7 +330,7 @@ export const ProductEntryForm: React.FC = () => {
                   <FormLabel>Carbon Footprint (kg CO2)</FormLabel>
                   <NumberInput
                     value={value}
-                    onChange={(_, value) => onChange(value)}
+                    onChange={(_, valueAsNumber) => onChange(valueAsNumber)}
                     min={0}
                   >
                     <NumberInputField />
@@ -311,37 +347,38 @@ export const ProductEntryForm: React.FC = () => {
 
           {/* Image Upload */}
           <Controller
-            name="image"
+            name="imageUrl"
             control={control}
             render={({ field: { onChange, value } }) => (
-              <FormControl isInvalid={!!errors.image}>
+              <FormControl isInvalid={!!errors.imageUrl}>
                 <FormLabel>Product Image</FormLabel>
                 <Dropzone
-                  onFileAccepted={onChange}
+                  onFileAccepted={(file) => onChange(file)}
                   maxSize={5000000}
                   acceptedFileTypes={['image/jpeg', 'image/png', 'image/webp']}
-                  value={value}
+                  value={value as unknown as File}
                 />
-                <FormErrorMessage>{errors.image?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.imageUrl?.message}</FormErrorMessage>
               </FormControl>
             )}
           />
 
           {/* Submit Button */}
-          <AnimatedButton
-            type="submit"
-            colorScheme="blue"
-            size="lg"
-            width="full"
-            isLoading={isSubmitting}
-            isDisabled={!isValid || isSubmitting || !account}
-            leftIcon={<Icon as={isValid ? Check : AlertCircle} />}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {isSubmitting ? 'Creating Product...' : 'Create Product'}
-          </AnimatedButton>
-        </MotionVStack>
+          {/* Submit Button */}
+          <Box width="full">
+            <MotionButton
+              type="submit"
+              colorScheme="blue"
+              size="lg"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+    
+            >
+              {isSubmitting ? 'Creating Product...' : 'Create Product'}
+            </MotionButton>
+          </Box>
+          </VStack>
+        </motion.div>
       </form>
     </AnimatedContainer>
   );

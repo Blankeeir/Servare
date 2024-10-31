@@ -18,6 +18,8 @@ export interface Verification {
   }
 
 export interface Product {
+    createdAt: string | number | Date;
+    listingType: string;
     id: string;
     imageUrl: string;
     name: string;
@@ -34,9 +36,23 @@ export interface Product {
     isVerified: boolean;
     carbonFootprint: number;
     qualityScore: number;
+    ipfsMetadataHash: string; // Added property
+    quality: string; // Add this line
 }
  
+export type Filter = {
+  priceRange: [number, number];
+  qualityScore: [number, number];
+  categories: string[];
+  listingType: 'all' | 'fixed' | 'auction';
+  carbonFootprint: [number, number];
+  location: string;
+  verificationStatus: 'all' | 'verified' | 'unverified';
+  expiryDateRange: [string, string];
+  sortBy: 'newest' | 'oldest' | 'price_low' | 'price_high' | 'quality_high' | 'expiry_soon';
+};
 export interface TrackingData {
+    tokenId: string;
     timestamp: number;
     location: string;
     handler: string;
@@ -48,23 +64,7 @@ export interface TrackingData {
     isValidated: boolean;
     validator: string;
   }
-  
-  export interface ProductData {
-    name: string;
-    description: string;
-    quantity: number;
-    location: string;
-    expiryDate: number;
-    productionDate: string;
-    category: string;
-    imageUri: string;
-    price: number;
-    isListed: boolean;
-    producer: string;
-    isVerified: boolean;
-    carbonFootprint: number;
-    qualityScore: number;
-  }
+
   
   export interface Listing {
     seller: string;
@@ -90,4 +90,41 @@ export interface TrackingData {
     from: string;
     to: string;
     value: string;
+  }
+
+  export interface ProfileData {
+    username: string;
+    email: string;
+    id: string;
+    name: string;
+    avatarUrl: string;
+    role: string;
+  }
+
+  export interface ProductFilters {
+    category?: string;
+    producer?: string;
+    isListed?: boolean;
+    minPrice?: number;
+    maxPrice?: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+    limit?: number;
+    offset?: number;
+  }
+  export interface User {
+    address: string;
+
+    primaryWallet?: {
+      address: string;
+      connector?: {
+        name: string;
+      };
+    };
+  }
+
+  export interface StoredUserData {
+    address: string;
+    primaryWallet?: string;
+    lastLogin?: number;
   }

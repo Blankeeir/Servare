@@ -1,25 +1,27 @@
-// apps/frontend/src/components/Form/FormFileUpload.tsx
+// components/Form/FormFileUpload.tsx
 import React from 'react';
-import { Control, Controller, FieldValues} from 'react-hook-form';
-import { FormControl, FormHelperText } from '@mui/material';
+import { Control, Controller, FieldValues } from 'react-hook-form';
+import { FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react';
 import { Dropzone } from '../Dropzone';
 
 interface FormFileUploadProps {
   name: string;
   control: Control<FieldValues>;
-  label: string;
+  label?: string;
   rules?: object;
-  accept?: string[];
+  acceptedFileTypes?: string[];
   maxSize?: number;
+  helperText?: string;
 }
 
 export const FormFileUpload: React.FC<FormFileUploadProps> = ({
   name,
   control,
-//   label,
+  label,
   rules,
-  accept,
+  acceptedFileTypes,
   maxSize,
+  // helperText
 }) => {
   return (
     <Controller
@@ -30,14 +32,16 @@ export const FormFileUpload: React.FC<FormFileUploadProps> = ({
         field: { onChange, value },
         fieldState: { error }
       }) => (
-        <FormControl fullWidth error={!!error}>
+        <FormControl isInvalid={!!error}>
+          {label && <FormLabel>{label}</FormLabel>}
           <Dropzone
             onFileAccepted={onChange}
-            acceptedFileTypes={accept}
+            acceptedFileTypes={acceptedFileTypes}
             maxSize={maxSize}
+            value={value}
           />
           {error && (
-            <FormHelperText>{error.message}</FormHelperText>
+            <FormErrorMessage>{error.message}</FormErrorMessage>
           )}
         </FormControl>
       )}

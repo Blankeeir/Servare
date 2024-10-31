@@ -3,7 +3,7 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 import "./interfaces/IServareNFT.sol";
 import "./interfaces/ISupplyChainTracking.sol";
 
@@ -34,7 +34,7 @@ contract SupplyChainTracking is ISupplyChainTracking, AccessControl, Pausable {
     
     constructor(address _nftContract) {
         nftContract = IServareNFT(_nftContract);
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
     function addTrackingData(

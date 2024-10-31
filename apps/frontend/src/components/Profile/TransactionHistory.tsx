@@ -80,7 +80,7 @@ export const TransactionHistory: React.FC<{
                 </Badge>
               </Td>
               <Td fontWeight="medium">
-                {FormattingUtils.formatAmount(tx.amount)} VET
+                {tx.amount} VET
               </Td>
               <Td>
                 {new Date(tx.timestamp).toLocaleString()}

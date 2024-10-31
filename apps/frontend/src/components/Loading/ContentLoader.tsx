@@ -1,9 +1,13 @@
 // apps/frontend/src/components/Loading/ContentLoader.tsx
 import React from 'react';
-import { Box, Spinner, Text, VStack } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { shouldForwardProp, Spinner, Text, VStack } from '@chakra-ui/react';
+import { isValidMotionProp, motion } from 'framer-motion';
 
-const MotionBox = motion(Box);
+import { chakra } from '@chakra-ui/react';
+
+const MotionBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+});
 
 interface ContentLoaderProps {
   text?: string;
@@ -17,7 +21,7 @@ export const ContentLoader: React.FC<ContentLoaderProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      // transition={{ duration: 0.3 }}
     >
       <VStack spacing={4}>
         <Spinner

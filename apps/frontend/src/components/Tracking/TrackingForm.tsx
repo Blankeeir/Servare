@@ -9,18 +9,29 @@ import {
   NumberInput,
   NumberInputField,
 } from '@chakra-ui/react';
+
 import { useForm } from 'react-hook-form';
-import { useSupplyChain } from '../hooks/useSupplyChain';
+import { useSupplyChain } from '../../hooks/useSupplyChain';
+import { ProductFormData } from '../../schemas';
+interface TrackingFormProps {
 
-export const TrackingForm: React.FC<{ tokenId: string }> = ({ tokenId }) => {
+  tokenId: string;
+
+  onSubmit: (event: React.FormEvent) => void;
+
+}
+
+export const TrackingForm: React.FC<TrackingFormProps> = ({ tokenId }) => {
   const { addTracking } = useSupplyChain(tokenId);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm<ProductFormData>();
 
-  const onSubmit = async (data: any) => {
-    await addTracking.mutateAsync({
+  const onSubmit = async (data: ProductFormData) => {
+    addTracking({
       ...data,
       envKeys: ['temperature', 'humidity'],
-      envValues: [data.temperature.toString(), data.humidity.toString()]
+      envValues: [data.temperature.toString(), data.humidity.toString()],
+      handler: '',
+      status: ''
     });
   };
 
@@ -54,7 +65,6 @@ export const TrackingForm: React.FC<{ tokenId: string }> = ({ tokenId }) => {
         <Button 
           type="submit" 
           colorScheme="blue" 
-          isLoading={addTracking.isLoading}
         >
           Add Tracking Data
         </Button>

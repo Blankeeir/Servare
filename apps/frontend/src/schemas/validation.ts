@@ -55,6 +55,13 @@ export const productSchema = z.object({
   imageUri: z.string()
     .optional()
     .nullable(),
+
+  temperature: z.number(),
+
+  humidity: z.number(),
+  
+  handler: z.string(), // Added handler field
+  carbonFootprint: z.number(), // Added carbonFootprint property
 });
 
 export const supplyChainEventSchema = z.object({

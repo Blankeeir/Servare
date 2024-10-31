@@ -19,24 +19,47 @@ import {
   StatNumber,
   StatHelpText,
   Badge,
-  Button,
+  // Button,
   useColorModeValue,
   Skeleton,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { Package, History, Settings, Activity } from 'lucide-react';
 import { useWallet } from '@vechain/dapp-kit-react';
-import { useProfile } from '../hooks/useProfile';
-import { AnimatedContainer } from '../components/animations/AnimatedContainer';
-import { ProductCard } from '../components/ProductCard';
-import { TransactionHistory } from '../components/TransactionHistory';
-import { FormattingUtils } from '@servare/utils';
+import { useProfileData } from '../../hooks/useProfileData';
+import { AnimatedContainer } from '../Animations/AnimatedContainer';
+import { ProductCard } from '../ProductCard';
+import { TransactionHistory } from './TransactionHistory';
+import { FormattingUtils } from '@repo/utils';
+import { ActivityFeed } from './ActivityFeed';
+import { ProfileSettings } from './ProfileSettings';
+import { Product } from '../../util/types';
 
-const MotionBox = motion(Box);
+import { chakra, shouldForwardProp } from '@chakra-ui/react';
+import { isValidMotionProp } from 'framer-motion';
+// import {ProfileData} from "../../util/types";
+const MotionBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+
+export interface LocalProfileData {
+  username: string;
+  email: string;
+  settings?: {
+    notifications: boolean;
+    emailUpdates: boolean;
+  };
+  reputation?: number;
+  productsCount?: number;
+  totalSales?: number;
+  transactionsCount?: number;
+  products?: Product[];
+  avatarUrl?: string;
+}
 
 export const Profile: React.FC = () => {
   const { account } = useWallet();
-  const { profile, isLoading } = useProfile(account);
+  const { profile = {} as LocalProfileData, isLoading } = useProfileData(account || undefined) as unknown as { profile: LocalProfileData; isLoading: boolean };
   const bgColor = useColorModeValue('white', 'gray.700');
 
   if (!account) {
@@ -61,7 +84,7 @@ export const Profile: React.FC = () => {
             shadow="md"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            // transition={{ duration: 0.5 }}
           >
             <HStack spacing={8}>
               <Avatar
@@ -148,22 +171,24 @@ export const Profile: React.FC = () => {
                       Array(6).fill(0).map((_, i) => (
                         <Skeleton key={i} height="200px" />
                       ))
-                    ) : profile?.products?.map((product) => (
-                      <ProductCard key={product.id} product={product} />
+                    ) : profile?.products?.map((product: Product) => (
+                      <ProductCard key={product.id} product={product} onClick={function (): void {
+                        throw new Error('Function not implemented.');
+                      } } />
                     ))}
                   </SimpleGrid>
                 </TabPanel>
 
                 <TabPanel>
-                  <TransactionHistory address={account} />
+                  <TransactionHistory />
                 </TabPanel>
 
                 <TabPanel>
-                  <ActivityFeed address={account} />
+                  <ActivityFeed/>
                 </TabPanel>
 
                 <TabPanel>
-                  <ProfileSettings profile={profile} />
+                  <ProfileSettings profile = {profile} />
                 </TabPanel>
               </TabPanels>
             </Tabs>

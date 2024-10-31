@@ -14,7 +14,7 @@ import {
 import { useSupplyChain } from '../../hooks/useSupplyChain';
 
 export const TrackingHistory: React.FC<{ tokenId: string }> = ({ tokenId }) => {
-    const { trackingHistory, isLoadingHistory } = useSupplyChain(tokenId) as {
+    const { trackingHistory, isLoadingHistory } = useSupplyChain(tokenId) as unknown as {
         trackingHistory: Array<{
             timestamp: number;
             location: string;
@@ -22,7 +22,7 @@ export const TrackingHistory: React.FC<{ tokenId: string }> = ({ tokenId }) => {
             temperature: number;
             humidity: number;
             isValidated: boolean;
-        }>;
+        }>| undefined;
         isLoadingHistory: boolean;
     };
   if (isLoadingHistory) {

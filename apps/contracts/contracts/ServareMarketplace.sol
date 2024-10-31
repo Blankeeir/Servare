@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol"
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -66,7 +66,7 @@ contract ServareMarketplace is ReentrancyGuard, AccessControl {
         nftContract = IERC721(_nftContract);
         vetToken = IERC20(_vetToken);
         feeCollector = _feeCollector;
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
     function listItem(

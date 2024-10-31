@@ -26,12 +26,12 @@ export const useVeChain = () => {
     return balance.balance;
   };
 
-  const sendTransaction = async (txParams: unknown) => {
+  const sendTransaction = async (txParams: Connex.Vendor.TxMessage) => {
     if (!connex || !account) throw new Error('Connex or account not initialized');
 
     try {
       const signedTx = await connex.vendor
-        .sign('tx', [txParams])
+        .sign('tx', txParams)
         .request();
       return signedTx;
     } catch (error) {
@@ -41,6 +41,7 @@ export const useVeChain = () => {
   };
 
   return {
+    account,
     connex,
     getBalance,
     sendTransaction

@@ -1,11 +1,12 @@
 // hooks/useProductFilters.ts
 import { useState } from 'react';
+import { Product } from '../util/types';
 
 export const useProductFilters = () => {
   const [filters, setFilters] = useState({
     priceRange: [0, 1000],
     qualityScore: [0, 100],
-    categories: [],
+    categories: [] as string[],
     listingType: 'all',
     carbonFootprint: [0, 100],
     location: '',
@@ -17,7 +18,7 @@ export const useProductFilters = () => {
     sortBy: 'newest'
   });
 
-  const applyFilters = (products: any[]) => {
+  const applyFilters = (products: Product[]) => {
     return products.filter(product => {
       // Price filter
       if (product.price < filters.priceRange[0] || 
@@ -84,39 +85,4 @@ export const useProductFilters = () => {
     setFilters,
     applyFilters
   };
-};
-
-// Usage in Marketplace component:
-export const Marketplace: React.FC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { filters, setFilters, applyFilters } = useProductFilters();
-  const { products, isLoading } = useProducts();
-
-  const filteredProducts = useMemo(() => {
-    if (!products) return [];
-    return applyFilters(products);
-  }, [products, filters]);
-
-  return (
-    <Box>
-      {/* Your existing marketplace UI */}
-      <Button leftIcon={<FilterIcon />} onClick={onOpen}>
-        Filters
-      </Button>
-
-      <FilterDrawer
-        isOpen={isOpen}
-        onClose={onClose}
-        onApplyFilters={setFilters}
-        currentFilters={filters}
-      />
-
-      {/* Display filtered products */}
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-        {filteredProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </SimpleGrid>
-    </Box>
-  );
 };

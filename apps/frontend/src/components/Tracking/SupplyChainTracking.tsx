@@ -18,15 +18,19 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import { Search, Filter } from 'lucide-react';
+import { motion, isValidMotionProp } from 'framer-motion';
+import { Search } from 'lucide-react';
 import { useSupplyChain } from '../../hooks/useSupplyChain';
 import { TrackingHistory } from './TrackingHistory';
 import { TrackingForm } from './TrackingForm';
 import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { useWallet } from '@vechain/dapp-kit-react';
+import { chakra } from '@chakra-ui/react';
+import { TrackingData } from '../../util';
 
-const MotionBox = motion(Box);
+const MotionBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || ['children'].includes(prop),
+});
 
 export const SupplyChainTracking: React.FC = () => {
   const [searchTokenId, setSearchTokenId] = useState('');
@@ -34,7 +38,7 @@ export const SupplyChainTracking: React.FC = () => {
   const bgColor = useColorModeValue('white', 'gray.700');
   const { account } = useWallet();
 
-  const { trackingHistory, isLoadingHistory, addTracking } = useSupplyChain(activeTokenId);
+  const { addTracking } = useSupplyChain();
 
   const handleSearch = () => {
     if (searchTokenId) {
@@ -50,7 +54,6 @@ export const SupplyChainTracking: React.FC = () => {
           <MotionBox
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
           >
             <Heading mb={4}>Supply Chain Tracking</Heading>
             <Text color="gray.600">
@@ -92,16 +95,28 @@ export const SupplyChainTracking: React.FC = () => {
 
                 <TabPanels>
                   <TabPanel>
-                    <TrackingHistory
-                      tokenId={activeTokenId}
-                      events={trackingHistory}
-                      isLoading={isLoadingHistory}
-                    />
+                    <TrackingHistory tokenId={activeTokenId} />
                   </TabPanel>
                   <TabPanel>
                     <TrackingForm
                       tokenId={activeTokenId}
-                      onSubmit={addTracking}
+                      onSubmit={(event: React.FormEvent) => {
+                        event.preventDefault();
+                        const trackingData: TrackingData = {
+                          tokenId: activeTokenId,
+                          timestamp: 0,
+                          location: '',
+                          handler: '',
+                          status: '',
+                          envKeys: [],
+                          envValues: [],
+                          temperature: 0,
+                          humidity: 0,
+                          isValidated: false,
+                          validator: ''
+                        };
+                        addTracking(trackingData);
+                      }}
                     />
                   </TabPanel>
                 </TabPanels>

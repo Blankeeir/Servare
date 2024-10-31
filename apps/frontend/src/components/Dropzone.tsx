@@ -1,80 +1,177 @@
-import { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
+export interface FileWithPreview extends File {
+  preview?: string;
+}
+
+// components/Dropzone/Dropzone.tsx
+import React, { useCallback, useState } from "react";
+import { useDropzone, FileRejection } from "react-dropzone";
+import { Box, HStack, Text, VStack, Image, useToast } from "@chakra-ui/react";
 import { ScanIcon } from "./Icon";
-// import { blobToBase64, getDeviceId, resizeImage } from "../util";
 import { useWallet } from "@vechain/dapp-kit-react";
-// import { submitReceipt } from "../networking";
-import { useDisclosure, useSubmission } from "../hooks";
 
-export const Dropzone = () => {
+interface DropzoneProps {
+  onFileAccepted: (file: File) => void;
+  acceptedFileTypes?: string[];
+  maxSize?: number;
+  value?: File;
+}
+
+export const Dropzone: React.FC<DropzoneProps> = ({
+  onFileAccepted,
+  acceptedFileTypes = ["image/jpeg", "image/png", "image/webp"],
+  maxSize = 5 * 1024 * 1024, // 5MB
+  value
+}) => {
   const { account } = useWallet();
+  const toast = useToast();
+  const [preview, setPreview] = useState<string | undefined>(undefined);
 
-  const { setIsLoading, setResponse } = useSubmission();
-  const { onOpen } = useDisclosure();
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: (acceptedFiles: File[]) => {
-      onFileUpload(acceptedFiles); // Pass the files to the callback
-    },
-    maxFiles: 1, // Allow only one file
-    accept: {
-      "image/*": [], // Accept only image files
-    },
-  });
-
-  const onFileUpload = useCallback(
-    async (files: File[]) => {
-      if (files.length > 1 || files.length === 0) {
-        alert("Please upload only one file");
-        return;
-      }
-
+  const onDrop = useCallback(
+    async (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
       if (!account) {
-        alert("Please connect your wallet");
+        toast({
+          title: "Wallet not connected",
+          description: "Please connect your wallet first",
+          status: "error",
+          duration: 3000,
+        });
         return;
       }
 
-      setIsLoading(true);
-      onOpen();
+      if (rejectedFiles.length > 0) {
+        const errors = rejectedFiles[0].errors.map(err => err.message).join(", ");
+        toast({
+          title: "File upload failed",
+          description: errors,
+          status: "error",
+          duration: 3000,
+        });
+        return;
+      }
 
-      const file = files[0];
+      if (acceptedFiles.length === 1) {
+        const file = acceptedFiles[0];
+        
+        // Create preview
+        const objectUrl = URL.createObjectURL(file);
+        setPreview(objectUrl);
 
-      // const resizedBlob = await resizeImage(file);
-      // const base64Image = await blobToBase64(resizedBlob as Blob);
-      // const deviceID = await getDeviceId();
-
+        try {
+          onFileAccepted(file);
+        } catch (error) {
+          toast({
+            title: "Upload failed",
+            description: (error as Error).message,
+            status: "error",
+            duration: 3000,
+          });
+        }
+      }
     },
-    [account, onOpen, setIsLoading, setResponse],
+    [account, onFileAccepted, toast]
   );
 
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject
+  } = useDropzone({
+    onDrop,
+    maxFiles: 1,
+    accept: {
+      'image/*': acceptedFileTypes
+    },
+    maxSize
+  });
+
+  // Cleanup preview on unmount
+  React.useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
   return (
-    <VStack w={"full"} mt={3}>
+    <VStack w="full" spacing={4}>
       <Box
         {...getRootProps()}
         p={5}
         border="2px"
-        borderColor={isDragActive ? "green.300" : "gray.300"}
+        borderColor={
+          isDragAccept 
+            ? "green.300" 
+            : isDragReject 
+              ? "red.300" 
+              : isDragActive 
+                ? "blue.300" 
+                : "gray.300"
+        }
         borderStyle="dashed"
         borderRadius="md"
-        bg={isDragActive ? "green.100" : "gray.50"}
+        bg={
+          isDragAccept 
+            ? "green.50" 
+            : isDragReject 
+              ? "red.50" 
+              : isDragActive 
+                ? "blue.50" 
+                : "gray.50"
+        }
         textAlign="center"
         cursor="pointer"
         _hover={{
-          borderColor: "green.500",
-          bg: "green.50",
+          borderColor: "blue.500",
+          bg: "blue.50",
         }}
-        w={"full"}
-        h={"200px"}
-        display="flex" // Make the Box a flex container
-        alignItems="center" // Align items vertically in the center
-        justifyContent="center" // Center content horizontally
+        w="full"
+        h="200px"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        position="relative"
       >
         <input {...getInputProps()} />
-        <HStack>
-          <ScanIcon size={120} color={"gray"} />
-          <Text>Upload to scan</Text>
-        </HStack>
+        {preview || value ? (
+          <Box position="relative" w="full" h="full">
+            <Image
+              src={preview || (value instanceof File ? URL.createObjectURL(value) : undefined)}
+              alt="Preview"
+              objectFit="contain"
+              w="full"
+              h="full"
+            />
+            <Text
+              position="absolute"
+              bottom={2}
+              left={0}
+              right={0}
+              textAlign="center"
+              fontSize="sm"
+              color="gray.600"
+            >
+              Click or drag to replace
+            </Text>
+          </Box>
+        ) : (
+          <HStack spacing={4}>
+            <ScanIcon size={120} color="gray.400" />
+            <VStack spacing={2} align="start">
+              <Text fontWeight="medium">
+                Drop your file here, or click to select
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                Supports: {acceptedFileTypes.join(", ")}
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                Max size: {Math.floor(maxSize / 1024 / 1024)}MB
+              </Text>
+            </VStack>
+          </HStack>
+        )}
       </Box>
     </VStack>
   );

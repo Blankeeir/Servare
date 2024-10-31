@@ -1,5 +1,9 @@
 // apps/frontend/src/components/Profile/ProfileSettings.tsx
 import React from 'react';
+import {LocalProfileData} from './Profile';
+interface ProfileSettingsProps {
+  profile: LocalProfileData
+}
 import {
   VStack,
   SimpleGrid,
@@ -11,15 +15,20 @@ import {
   Text,
   useToast,
   Divider,
+  chakra,
+  shouldForwardProp,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { isValidMotionProp, motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 
-const MotionVStack = motion(VStack);
-
-interface ProfileSettingsProps {
-  profile: any;
-}
+const MotionVStack = chakra(
+  React.forwardRef<HTMLDivElement, React.ComponentProps<typeof motion.div>>((props, ref) => (
+    <motion.div ref={ref} {...props} />
+  )),
+  {
+    shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+  }
+);
 
 export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ profile }) => {
   const toast = useToast();
@@ -32,7 +41,7 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ profile }) => 
     }
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async () => {
     try {
       // Update profile settings
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API call
@@ -55,9 +64,9 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({ profile }) => 
     <MotionVStack
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      spacing={8}
-      align="stretch"
+      // transition={{ duration: 0.3 }}
+      // spacing={8}
+      // align="stretch"
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={6} align="stretch">

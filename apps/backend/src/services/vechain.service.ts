@@ -2,9 +2,9 @@
 import { Framework } from '@vechain/connex-framework';
 
 import { Driver, SimpleNet } from '@vechain/connex-driver';
-import { ServareMarketplaceAbi } from '../../../contracts/contracts/abi/ServareMarketPlace.abi';
-import { SupplyChainTrackingAbi } from '../../../contracts/contracts/abi/SupplyChainTracking.abi';
-import { ServareNFTAbi } from '../../../contracts/contracts/abi/ServareNFT.abi';
+import ServareMarketplaceAbi from '../../../contracts/abi/ServareMarketplace.json';
+import SupplyChainTrackingAbi from '../../../contracts/abi/SupplyChainTracking.json';
+import ServareNFTAbi from '../../../contracts/abi/SurfoodNFT.json';
 import { config } from '../config';
 
 export class VeChainService {

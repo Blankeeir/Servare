@@ -6,7 +6,7 @@ import { useToast } from './useToast';
 
 export const useForm = <T extends z.ZodType>(
   schema: T,
-  options?: Omit<UseFormProps<z.infer<T>>, 'resolver'>
+  options?: Omit<UseFormProps<z.infer<T>> & { onSubmit?: (data: z.infer<T>) => Promise<void> }, 'resolver'>
 ) => {
   const toast = useToast();
   const form = useRHForm<z.infer<T>>({
@@ -20,8 +20,12 @@ export const useForm = <T extends z.ZodType>(
         await options.onSubmit(data);
         toast.success('Form submitted successfully');
       }
-    } catch (error: any) {
-      toast.error(error.message || 'Form submission failed');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || 'Form submission failed');
+      } else {
+        toast.error('Form submission failed');
+      }
     }
   });
 

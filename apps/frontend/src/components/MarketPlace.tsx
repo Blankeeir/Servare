@@ -1,5 +1,5 @@
 // apps/frontend/src/pages/Marketplace.tsx
-import React, { useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 import {
   Box,
   SimpleGrid,
@@ -12,35 +12,47 @@ import {
   SlideFade,
   InputGroup,
   InputLeftElement,
+  chakra,
+  shouldForwardProp,
 } from '@chakra-ui/react';
-import { Search, Filter, Tag } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Filter as LucideFilter, Search } from 'lucide-react';
+import type { Filter } from '../util/types'; // Adjust the import path as necessary
+import { isValidMotionProp, motion } from 'framer-motion';
 import { useProducts } from '../hooks/useProduct';
 import { ProductCard } from './ProductCard';
-import {Product} from '../util/types';
-// import { ProductDetailModal } from './ProductDetailModal';
+import { Product } from '../util/types';
 import { FilterDrawer } from './FilterDrawer';
+import { useProductFilters } from '../hooks';
 
-const MotionGrid = motion.custom(SimpleGrid);
+const MotionGrid = chakra(
+  forwardRef<HTMLDivElement, React.ComponentProps<typeof motion.div>>((props, ref) => <motion.div ref={ref} {...props} />),
+  {
+    shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+  }
+);
 
 export const Marketplace: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const { products, isLoading, error } = useProducts();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { filters, setFilters, applyFilters } = useProductFilters() as unknown as {
+    filters: Omit<Filter, 'priceRange'> & { priceRange: [number, number] };
+    setFilters: (filters: Omit<Filter, 'priceRange'> & { priceRange: [number, number] }) => void;
+    applyFilters: (products: Product[]) => Product[];
+  };
+  const { products, isLoading } = useProducts();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   const filterDrawer = useDisclosure();
 
-  const filteredProducts = products?.filter((product: {
-      name: any;
-      description: any;
-      category: string;type: Product
-}) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredProducts = useMemo(() => {
+    if (!products) return [];
+    return applyFilters(products).filter((product: Product) => {
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [products, filters, searchTerm, selectedCategory, applyFilters]);
 
   return (
     <Box>
@@ -76,7 +88,7 @@ export const Marketplace: React.FC = () => {
             borderRadius="md"
             bg="white"
           >
-            <Filter />
+            <LucideFilter />
           </Box>
         </HStack>
       </SlideFade>
@@ -89,74 +101,27 @@ export const Marketplace: React.FC = () => {
         </SimpleGrid>
       ) : (
         <MotionGrid
-          columns={{ base: 1, md: 2, lg: 3 }}
-          spacing={6}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          // transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {filteredProducts?.map((product: any, index: number) => (
-            product && (
-              <ScaleFade in delay={index * 0.1} key={product.id}>
-                <ProductCard
-                  product={product}
-                  onClick={() => {
-                    setSelectedProduct(product);
-                    onOpen();
-                  }}
-                />
-              </ScaleFade>
-            )
+          {filteredProducts?.map((product: Product, index: number) => (
+            <ScaleFade in delay={index * 0.1} key={product.id}>
+              <ProductCard product={product} onClick={function (): void {
+                throw new Error('Function not implemented.');
+              } } />
+            </ScaleFade>
           ))}
         </MotionGrid>
       )}
 
-      <ProductDetailModal
-        isOpen={isOpen}
-        onClose={onClose}
-        product={selectedProduct}
-      />
-
       <FilterDrawer
-              isOpen={filterDrawer.isOpen}
-              onClose={filterDrawer.onClose} onApplyFilters={function (filters: any): void {
-                  throw new Error('Function not implemented.');
-              } }      />
+        isOpen={filterDrawer.isOpen}
+        onClose={filterDrawer.onClose}
+        onApplyFilters={setFilters}
+        currentFilters={filters}
+      />
     </Box>
   );
 };
-
-
-
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const { filters, setFilters, applyFilters } = useProductFilters();
-    const { products, isLoading } = useProduct();
-  
-    const filteredProducts = useMemo(() => {
-      if (!products) return [];
-      return applyFilters(products);
-    }, [products, filters]);
-  
-    return (
-      <Box>
-        {/* Your existing marketplace UI */}
-        <Button leftIcon={<FilterIcon />} onClick={onOpen}>
-          Filters
-        </Button>
-  
-        <FilterDrawer
-          isOpen={isOpen}
-          onClose={onClose}
-          onApplyFilters={setFilters}
-          currentFilters={filters}
-        />
-  
-        {/* Display filtered products */}
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </SimpleGrid>
-      </Box>
-    );
-  };

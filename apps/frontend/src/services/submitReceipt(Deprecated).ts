@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ReceiptData } from "./type";
+import { ReceiptData } from "./type(Deprecated)";
 import { backendURL } from "../config";
 
 export type Response = {

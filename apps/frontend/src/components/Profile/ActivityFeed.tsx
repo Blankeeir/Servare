@@ -7,8 +7,10 @@ import {
   HStack,
   Circle,
   Divider,
+  chakra,
+  shouldForwardProp,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { isValidMotionProp, motion } from 'framer-motion';
 import { 
   ShoppingCart, 
   Package, 
@@ -17,8 +19,10 @@ import {
   Clock
 } from 'lucide-react';
 
-const MotionBox = motion(Box);
-
+const MotionBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+// import { Profile } from '../../util/types';
 interface Activity {
   id: string;
   type: 'purchase' | 'listing' | 'sale' | 'shipment';
@@ -72,7 +76,7 @@ export const ActivityFeed: React.FC<{ activities?: Activity[] }> = ({
             key={activity.id}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
+            // transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <HStack spacing={4} bg="white" p={4} borderRadius="lg" shadow="sm">
               <Circle 

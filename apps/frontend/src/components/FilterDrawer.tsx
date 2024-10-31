@@ -35,17 +35,7 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import { FilterIcon, RefreshCcw } from 'lucide-react';
-type Filter = {
-    priceRange: [number, number];
-    qualityScore: [number, number];
-    categories: string[];
-    listingType: 'all' | 'fixed' | 'auction';
-    carbonFootprint: [number, number];
-    location: string;
-    verificationStatus: 'all' | 'verified' | 'unverified';
-    expiryDateRange: [string, string];
-    sortBy: 'newest' | 'oldest' | 'price_low' | 'price_high' | 'quality_high' | 'expiry_soon';
-};
+import { Filter } from '../util/types';
 
 interface FilterDrawerProps {
   isOpen: boolean;
