@@ -2,11 +2,11 @@
 import React from 'react';
 import { Controller, Control } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers';
-import { FormControl, FormHelperText } from '@mui/material';
+import { FormControl } from '@mui/material';
 
-interface FormDatePickerProps {
+export interface FormDatePickerProps {
   name: string;
-  control: Control<any>;
+  control: Control<{ [key: string]: unknown }>;
   label: string;
   rules?: object;
   minDate?: Date;

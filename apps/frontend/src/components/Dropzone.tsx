@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import { ScanIcon } from "./Icon";
-import { blobToBase64, getDeviceId, resizeImage } from "../util";
+// import { blobToBase64, getDeviceId, resizeImage } from "../util";
 import { useWallet } from "@vechain/dapp-kit-react";
 // import { submitReceipt } from "../networking";
 import { useDisclosure, useSubmission } from "../hooks";
@@ -40,26 +40,10 @@ export const Dropzone = () => {
 
       const file = files[0];
 
-      const resizedBlob = await resizeImage(file);
-      const base64Image = await blobToBase64(resizedBlob as Blob);
+      // const resizedBlob = await resizeImage(file);
+      // const base64Image = await blobToBase64(resizedBlob as Blob);
+      // const deviceID = await getDeviceId();
 
-      const deviceID = await getDeviceId();
-
-      // try {
-      //   const response = await submitReceipt({
-      //     address: account,
-      //     deviceID,
-      //     image: base64Image,
-      //   });
-
-      //   console.log(response);
-
-      //   setResponse(response);
-      // } catch (error) {
-      //   alert("Error submitting receipt");
-      // } finally {
-      //   setIsLoading(false);
-      // }
     },
     [account, onOpen, setIsLoading, setResponse],
   );

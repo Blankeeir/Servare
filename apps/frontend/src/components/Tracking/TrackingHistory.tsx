@@ -1,22 +1,31 @@
 // components/TrackingHistory.tsx
 import React from 'react';
 import {
-  Box,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Badge,
-  Skeleton
+    Box,
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    Badge,
+    Skeleton
 } from '@chakra-ui/react';
-import { useSupplyChain } from '../hooks/useSupplyChain';
+import { useSupplyChain } from '../../hooks/useSupplyChain';
 
 export const TrackingHistory: React.FC<{ tokenId: string }> = ({ tokenId }) => {
-  const { tracking } = useSupplyChain(tokenId);
-
-  if (tracking.isLoading) {
+    const { trackingHistory, isLoadingHistory } = useSupplyChain(tokenId) as {
+        trackingHistory: Array<{
+            timestamp: number;
+            location: string;
+            handler: string;
+            temperature: number;
+            humidity: number;
+            isValidated: boolean;
+        }>;
+        isLoadingHistory: boolean;
+    };
+  if (isLoadingHistory) {
     return <Skeleton height="400px" />;
   }
 
@@ -34,7 +43,7 @@ export const TrackingHistory: React.FC<{ tokenId: string }> = ({ tokenId }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {tracking.data?.map((event, index) => (
+          {trackingHistory?.map((event, index) => (
             <Tr key={index}>
               <Td>{new Date(event.timestamp * 1000).toLocaleString()}</Td>
               <Td>{event.location}</Td>

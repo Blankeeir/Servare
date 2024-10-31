@@ -26,43 +26,16 @@ import { z } from 'zod';
 import { AlertCircle, Check } from 'lucide-react';
 import { useVeChain } from '../../hooks/useVeChain';
 import { useToast } from '../../hooks/useToast';
-import { useTransactionHandler } from '../../hooks/useTransaction';
+import { useTransaction } from '../../hooks/useTransaction';
 import { useContract } from '../../hooks/useContract';
 import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { Dropzone } from '../Dropzone';
 import { SERVARE_NFT_ADDRESS } from '../../const';
 import { uploadToIPFS } from '../utils/ipfs';
 
-// Form validation schema
-const productSchema = z.object({
-  name: z.string()
-    .min(3, 'Name must be at least 3 characters')
-    .max(100, 'Name must be less than 100 characters'),
-  description: z.string()
-    .min(10, 'Description must be at least 10 characters')
-    .max(1000, 'Description must be less than 1000 characters'),
-  quantity: z.number()
-    .positive('Quantity must be positive')
-    .int('Quantity must be a whole number'),
-  location: z.string()
-    .min(3, 'Location is required'),
-  expiryDate: z.date()
-    .min(new Date(), 'Expiry date must be in the future'),
-  productionDate: z.date()
-    .max(new Date(), 'Production date cannot be in the future'),
-  category: z.enum(['fruits', 'vegetables', 'dairy', 'meat', 'grains']),
-  price: z.number()
-    .positive('Price must be positive')
-    .multipleOf(0.001, 'Price must have at most 3 decimal places'),
-  image: z.any()
-    .refine((file) => file instanceof File, 'Image is required')
-    .refine(
-      (file) => file?.size <= 5000000,
-      'Image must be less than 5MB'
-    ),
-  carbonFootprint: z.number()
-    .min(0, 'Carbon footprint cannot be negative')
-});
+import { ButtonStyle } from '../../theme/button';
+import {productSchema} from '../../schemas';
+
 
 type ProductFormData = z.infer<typeof productSchema>;
 
@@ -150,7 +123,7 @@ export const ProductEntryForm: React.FC = () => {
 
   return (
     <AnimatedContainer
-      variants="scale"
+      variant="scale"
       bg={bgColor}
       p={8}
       borderRadius="xl"

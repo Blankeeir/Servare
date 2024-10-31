@@ -15,14 +15,14 @@ import {
 } from '@chakra-ui/react';
 import { ExternalLink } from 'lucide-react';
 import { TableSkeleton } from '../Loading/TableSkeleton';
-import { FormattingUtils } from '@servare/utils';
+import { FormattingUtils } from '@repo/utils';
 import { AnimatedContainer } from '../Animations/AnimatedContainer';
 // // Combine Chakra and Motion props
 // const MotionBox = chakra(motion.div, {
 //     shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
 //   });
 
-interface Transaction {
+export interface Transaction {
   id: string;
   type: 'buy' | 'sell' | 'list' | 'transfer';
   amount: string;
