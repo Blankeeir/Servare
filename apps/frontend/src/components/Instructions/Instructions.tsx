@@ -1,32 +1,79 @@
-import { Card, Flex } from "@chakra-ui/react";
-import { Step } from "./Step";
+// components/Instructions.tsx
+import React from 'react';
+import { 
+  SimpleGrid, 
+  Button, 
+  Text, 
+  Icon, 
+  useColorModeValue 
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { ShoppingBag, Package, Activity } from 'lucide-react';
+import { AnimatedContainer } from '../Animations/AnimatedContainer';
 
-const Steps = [
-  {
-    icon: "/steps/1.svg",
-    title: "Purchase eco-friendly products",
-    description: "Buy products that are eco-friendly and sustainable.",
-  },
-  {
-    icon: "/steps/2.svg",
-    title: "Upload the receipt",
-    description: "Upload your receipt and AI will verify the products.",
-  },
-  {
-    icon: "/steps/3.svg",
-    title: "Earn rewards",
-    description: "Earn B3TR for purchasing eco-friendly products.",
-  },
-];
+export const Instructions: React.FC = () => {
+  const navigate = useNavigate();
+  const bgColor = useColorModeValue('white', 'gray.700');
 
-export const Instructions = () => {
+  const instructions = [
+    {
+      title: 'Browse Marketplace',
+      description: 'Explore sustainable food products',
+      icon: ShoppingBag,
+      path: '/marketplace',
+    },
+    {
+      title: 'Sell Your Items',
+      description: 'List your products on the blockchain',
+      icon: Package,
+      path: '/submit',
+    },
+    {
+      title: 'Track Supply Chain',
+      description: 'Monitor product journey',
+      icon: Activity,
+      path: '/tracking',
+    },
+  ];
+
   return (
-    <Card mt={3} w={"full"}>
-      <Flex p={{ base: 4 }} w="100%" direction={{ base: "column", md: "row" }}>
-        {Steps.map((step, index) => (
-          <Step key={index} {...step} />
+    <AnimatedContainer
+      variant="slide"
+      staggerChildren
+      staggerDelay={0.1}
+      animateOnScroll
+      threshold={0.2}
+    >
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
+        {instructions.map((instruction) => (
+          <Button
+            key={instruction.title}
+            onClick={() => navigate(instruction.path)}
+            variant="outline"
+            size="lg"
+            height="auto"
+            p={8}
+            w="full"
+            bg={bgColor}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={4}
+            _hover={{
+              transform: 'translateY(-4px)',
+              transition: 'transform 0.2s'
+            }}
+          >
+            <Icon as={instruction.icon} boxSize={8} />
+            <Text fontSize="lg" fontWeight="bold">
+              {instruction.title}
+            </Text>
+            <Text fontSize="sm" color="gray.500">
+              {instruction.description}
+            </Text>
+          </Button>
         ))}
-      </Flex>
-    </Card>
+      </SimpleGrid>
+    </AnimatedContainer>
   );
 };

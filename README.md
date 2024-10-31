@@ -104,7 +104,7 @@ yarn contracts:solo-up
 yarn contracts:deploy:solo
 
 OPENAI_API_KEY="Your Api Key"
-ADMIN_MNEMONIC= "denial kitchen pet squirrel other broom bar gas better priority spoil cross" 
+ADMIN_MNEMONIC="denial kitchen pet squirrel other broom bar gas better priority spoil cross" 
  yarn dev
 ```
 

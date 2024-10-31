@@ -15,3 +15,5 @@ export const { NETWORK_URL, NETWORK_TYPE } = validatedEnv;
 export const { REWARD_AMOUNT } = validatedEnv;
 
 export const ADMIN_PRIVATE_KEY = mnemonic.derivePrivateKey(ADMIN_MNEMONIC.split(' '));
+
+export { config };

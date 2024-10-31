@@ -1,78 +1,66 @@
-import { DAppKitProvider } from "@vechain/dapp-kit-react";
-import { ChakraProvider, Container, Flex } from "@chakra-ui/react";
-// import { ThemeProvider, CssBaseline } from '@mui/material';
-import { lightTheme } from "./theme";
-import { DynamicContextProvider, DynamicWidget } from '@dynamic-labs/sdk-react-core';
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
+// App.tsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ChakraProvider, Box } from '@chakra-ui/react';
+import { DAppKitProvider } from '@vechain/dapp-kit-react';
+import type { WalletConnectOptions } from '@vechain/dapp-kit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ToastProvider } from './components/Toast/ToastContext';
+import { lightTheme } from './theme';
 
-import {
-  Dropzone,
-  Footer,
-  InfoCard,
-  Instructions, 
-  Navbar,
-  // MarketPlace,
-  // ProductEntryForm,
-  // SubmissionModal,
-} from "./components";
+const walletConnectOptions: WalletConnectOptions = {
+  projectId: 'a0b855ceaf109dbc8426479a4c3d38d8',
+  metadata: {
+      name: 'Sample VeChain dApp',
+      description: 'A sample VeChain dApp',
+      url: window.location.origin,
+      icons: [`${window.location.origin}/images/logo/my-dapp.png`],
+  },
+};
 
-// import { useContract } from "./hooks/useContract";
-// import { 
-//     SERVARE_NFT_ADDRESS,
-//     DYNAMIC_ENV_ID ,
-//     VECHAIN_NODE_URL
-//   } from "./const";
+// Components
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { Home } from './Home';
+import { Marketplace } from './components/MarketPlace';
+import { ProductEntryForm } from './components/Form/ProductEntryForm';
+import { Profile } from './components/Profile/Profile';
+import { SupplyChainTracking } from './components/Tracking/SupplyChainTracking';
+import { DynamicAuthProvider } from './components/Auth/DynamicAuthProvider';
+const queryClient = new QueryClient();
 
-
-
-const App = () => (
-    <ChakraProvider theme={lightTheme}>
-      <DAppKitProvider
-        usePersistence
-        requireCertificate={false}
-        genesis="test"
-        nodeUrl="https://testnet.vechain.org/"
-        logLevel={"DEBUG"}
-      >
-        <Navbar />
-        <DynamicContextProvider
-        settings={{
-          environmentId: '7acebce4-9ec4-4363-a4f3-b85925f652a8',
-          walletConnectors: [ EthereumWalletConnectors ],
-        }}
-      >
-        <DynamicWidget />
-      </DynamicContextProvider>
-      <main className="flex-1 container mx-auto px-4 py-8">
-              <div className="max-w-7xl mx-auto space-y-8">
-                <InfoCard />
-                <Instructions />
-                {/* <ProductEntryForm /> */}
-                <Dropzone />
-              </div>
-            </main>
-        <Flex flex={1}>
-          <Container
-            mt={{ base: 4, md: 10 }}
-            maxW={"container.xl"}
-            mb={{ base: 4, md: 10 }}
-            display={"flex"}
-            flex={1}
-            alignItems={"center"}
-            justifyContent={"flex-start"}
-            flexDirection={"column"}
-          >
-            <InfoCard />
-            <Instructions />
-            <Dropzone />
-          </Container>
-        </Flex>
-        <Footer />
-
-        {/* MODALS  */}
-        {/* <SubmissionModal /> */}
-      </DAppKitProvider>
-    </ChakraProvider>
-);
+const App: React.FC = () => {
+  return (
+    <Router>
+      <ChakraProvider theme={lightTheme}>
+        <QueryClientProvider client={queryClient}>
+          <DynamicAuthProvider>
+          <DAppKitProvider
+            nodeUrl={'https://mainnet.vechain.org'}
+            usePersistence
+            walletConnectOptions={walletConnectOptions}
+        >
+              <ToastProvider>
+                <Box minH="100vh" display="flex" flexDirection="column">
+                  <Navbar />
+                  <Box flex="1" as="main">
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/marketplace" element={<Marketplace />} />
+                      <Route path="/submit" element={<ProductEntryForm />} />
+                      <Route path="/profile" element={<Profile />} />
+                      <Route path="/tracking" element={<SupplyChainTracking />} />
+                    </Routes>
+                  </Box>
+                  <Footer />
+                </Box>
+              </ToastProvider>
+            </DAppKitProvider>
+          </DynamicAuthProvider>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </Router>
+  );
+};
 
 export default App;

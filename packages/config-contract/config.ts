@@ -46,6 +46,7 @@ export const SERVARE_SOL_ABI = [
     "name": "AccessControlBadConfirmation",
     "type": "error"
   },
+  
   {
     "inputs": [
       {

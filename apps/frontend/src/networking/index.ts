@@ -1,1 +1,1 @@
-export * from "./submitReceipt";
+export * from "./api-client";

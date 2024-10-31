@@ -1,18 +1,58 @@
-import { create } from "zustand";
-import { Response } from "../networking";
+// hooks/useSubmission.ts
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
-interface useSubmissionState {
+interface SubmissionState {
   isLoading: boolean;
-  response: Response | null;
-  setIsLoading: (isLoading: boolean) => void;
-  setResponse: (response: Response) => void;
+  error: string | null;
+  response: Record<string, unknown> | null;
+  submit: (data: unknown) => Promise<void>;
+  clearError: () => void;
   clearAll: () => void;
 }
 
-export const useSubmission = create<useSubmissionState>((set) => ({
-  isLoading: false,
-  response: null,
-  setIsLoading: (isLoading) => set({ isLoading }),
-  setResponse: (response) => set({ response }),
-  clearAll: () => set({ isLoading: false, response: null }),
-}));
+export const useSubmission = create<SubmissionState>()(
+  devtools(
+    (set) => ({
+      isLoading: false,
+      error: null,
+      response: null,
+
+      submit: async (data) => {
+        try {
+          set({ isLoading: true, error: null });
+          
+          // TODO: Replace with your actual submission logic
+          const response = await fetch('/api/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (!response.ok) {
+            throw new Error('Submission failed');
+          }
+
+          const result = await response.json();
+          set({ response: result });
+        } catch (error: unknown) {
+          set({ error: (error instanceof Error) ? error.message : String(error) });
+          throw error;
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
+      clearError: () => set({ error: null }),
+      
+      clearAll: () => set({
+        isLoading: false,
+        error: null,
+        response: null
+      })
+    }),
+    { name: 'submission-store' }
+  )
+);

@@ -1,16 +1,37 @@
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+// apps/backend/src/dtos/submission.dto.ts
+import { IsString, IsNumber, IsDate, IsOptional, Min } from 'class-validator';
 
-export class SubmitDto {
+export class SubmissionDto {
   @IsString()
-  @IsNotEmpty()
-  public image: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @Length(42, 42) // 42 is the length of an Vechain address including the 0x prefix
-  public address: string;
+  public name!: string;
 
   @IsString()
-  @IsNotEmpty()
-  public deviceID: string;
+  public description!: string;
+
+  @IsNumber()
+  @Min(0)
+  public quantity!: number;
+
+  @IsString()
+  public location!: string;
+
+  @IsDate()
+  public expiryDate!: Date;
+
+  @IsDate()
+  public productionDate!: Date;
+
+  @IsString()
+  public category!: string;
+
+  @IsNumber()
+  @Min(0)
+  public price!: number;
+
+  @IsString()
+  @IsOptional()
+  public imageUri?: string;
+
+  @IsOptional()
+  public metadata?: Record<string, any>;
 }
