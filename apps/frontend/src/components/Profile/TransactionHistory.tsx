@@ -41,14 +41,14 @@ export const TransactionHistory: React.FC<{
   }
 
   return (
-    <AnimatedContainer
-      variant="fade"
-      isVisible={true}
-      bg={bgColor}
-      borderRadius="xl"
-      shadow="sm"
-      overflow="hidden"
-    >
+    // <AnimatedContainer
+    //   variant="fade"
+    //   isVisible={true}
+    //   bg={bgColor}
+    //   borderRadius="xl"
+    //   shadow="sm"
+    //   overflow="hidden"
+    // >
       <Table>
         <Thead>
           <Tr>
@@ -61,54 +61,56 @@ export const TransactionHistory: React.FC<{
         </Thead>
         <Tbody>
           {transactions.map((tx, index) => (
-            <AnimatedContainer
-              key={tx.id}
-              variant="slide"
-              delay={index * 0.1}
-              as="tr"
-            >
-              <Td>
-                <Badge
-                  colorScheme={
-                    tx.type === 'buy' ? 'green' :
-                    tx.type === 'sell' ? 'blue' :
-                    tx.type === 'list' ? 'purple' :
-                    'gray'
-                  }
-                >
-                  {tx.type.toUpperCase()}
-                </Badge>
-              </Td>
-              <Td fontWeight="medium">
-                {tx.amount} VET
-              </Td>
-              <Td>
-                {new Date(tx.timestamp).toLocaleString()}
-              </Td>
-              <Td>
-                <Badge
-                  colorScheme={
-                    tx.status === 'completed' ? 'green' :
-                    tx.status === 'pending' ? 'yellow' :
-                    'red'
-                  }
-                >
-                  {tx.status}
-                </Badge>
-              </Td>
-              <Td>
-                <Link
-                  href={`https://explore-testnet.vechain.org/transactions/${tx.txHash}`}
-                  isExternal
-                  color="primary.500"
-                  display="flex"
-                  alignItems="center"
-                >
-                  {FormattingUtils.formatAddress(tx.txHash)}
-                  <Icon as={ExternalLink} ml={1} boxSize={4} />
-                </Link>
-              </Td>
-            </AnimatedContainer>
+            // <AnimatedContainer
+            //   key={tx.id}
+            //   variant="slide"
+            //   delay={index * 0.1}
+            //   as="tr"
+            // >
+              <Tr>
+                <Td>
+                  <Badge
+                    colorScheme={
+                      tx.type === 'buy' ? 'green' :
+                      tx.type === 'sell' ? 'blue' :
+                      tx.type === 'list' ? 'purple' :
+                      'gray'
+                    }
+                  >
+                    {tx.type.toUpperCase()}
+                  </Badge>
+                </Td>
+                <Td fontWeight="medium">
+                  {tx.amount} VET
+                </Td>
+                <Td>
+                  {new Date(tx.timestamp).toLocaleString()}
+                </Td>
+                <Td>
+                  <Badge
+                    colorScheme={
+                      tx.status === 'completed' ? 'green' :
+                      tx.status === 'pending' ? 'yellow' :
+                      'red'
+                    }
+                  >
+                    {tx.status}
+                  </Badge>
+                </Td>
+                <Td>
+                  <Link
+                    href={`https://explore-testnet.vechain.org/transactions/${tx.txHash}`}
+                    isExternal
+                    color="primary.500"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    {FormattingUtils.formatAddress(tx.txHash)}
+                    <Icon as={ExternalLink} ml={1} boxSize={4} />
+                  </Link>
+                </Td>
+              </Tr>
+            // </AnimatedContainer>
           ))}
           {transactions.length === 0 && (
             <Tr>
@@ -121,6 +123,6 @@ export const TransactionHistory: React.FC<{
           )}
         </Tbody>
       </Table>
-    </AnimatedContainer>
+    // </AnimatedContainer>
   );
 };

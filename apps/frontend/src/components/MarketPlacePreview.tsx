@@ -7,7 +7,7 @@ import { chakra, shouldForwardProp } from '@chakra-ui/react';
 import { useProducts } from '../hooks/useProduct';
 import { ProductCard } from './ProductCard';
 import { Product } from '../util/types';
-import { AnimatedContainer } from './Animations/AnimatedContainer';
+// import { AnimatedContainer } from './Animations/AnimatedContainer';
 import { CardSkeleton } from './Loading/CardSkeleton';
 
 // Create type-safe motion component
@@ -64,7 +64,7 @@ export const MarketplacePreview: React.FC = () => {
   };
 
   return (
-    <AnimatedContainer>
+    // <AnimatedContainer>
       <Box 
         as={motion.div}
         variants={containerVariants}
@@ -151,6 +151,6 @@ export const MarketplacePreview: React.FC = () => {
           </Button>
         </Box>
       </Box>
-    </AnimatedContainer>
+    // </AnimatedContainer>
   );
 };

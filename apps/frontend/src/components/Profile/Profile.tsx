@@ -27,7 +27,7 @@ import { motion } from 'framer-motion';
 import { Package, History, Settings, Activity } from 'lucide-react';
 import { useWallet } from '@vechain/dapp-kit-react';
 import { useProfileData } from '../../hooks/useProfileData';
-import { AnimatedContainer } from '../Animations/AnimatedContainer';
+// import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { ProductCard } from '../ProductCard';
 import { TransactionHistory } from './TransactionHistory';
 import { FormattingUtils } from '@repo/utils';
@@ -74,7 +74,7 @@ export const Profile: React.FC = () => {
 
   return (
     <Container maxW="container.xl" py={8}>
-      <AnimatedContainer>
+      {/* <AnimatedContainer> */}
         <VStack spacing={8} align="stretch">
           {/* Profile Header */}
           <MotionBox
@@ -194,7 +194,7 @@ export const Profile: React.FC = () => {
             </Tabs>
           </Box>
         </VStack>
-      </AnimatedContainer>
+      {/* </AnimatedContainer> */}
     </Container>
   );
 };

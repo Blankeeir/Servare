@@ -1,21 +1,25 @@
 // services/ProductService.ts
 // import { useContract } from '../hooks/useContract';
-import { Contract } from 'web3-eth-contract';
+import { ContractInterface } from 'web3-eth-contract';
 // import { SERVARE_NFT_ADDRESS } from '../const';
 import { uploadToIPFS } from '../util/ipfs';
 import { Product, ProductFilters } from '../util/types';
 import { ProductFormData } from '../schemas/validation';
-// import surfoodNFTAbi from '../abi/SurfoodNFT.json';
-// import { AbiItem } from 'web3-utils';
+import { useContract } from '../hooks';
+// import { callContract } from '../hooks';
+import { SERVARE_NFT_ADDRESS } from '../const';
+import surfoodNFTAbi from '../abi/SurfoodNFT.json';
+// import { AbiItem } from 'viem';
+import { AbiItem } from 'web3-utils';
 
 class ProductService {
   private static instance: ProductService;
-  private contract: Contract | null | undefined;
+  private contract: ContractInterface | null | undefined;
 
-  constructor() {
+constructor() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    // this.contract = useContract('ServareNFT', SERVARE_NFT_ADDRESS, surfoodNFTAbi.abi as AbiItem[]);
-  }
+//     this.contract = useContract('ServareNFT', SERVARE_NFT_ADDRESS, surfoodNFTAbi.abi as AbiItem[]);
+}
 
   public static getInstance(): ProductService {
     if (!ProductService.instance) {

@@ -22,7 +22,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useSubmission } from '../hooks/useSubmission';
-import { AnimatedContainer } from './Animations/AnimatedContainer';
+// import { AnimatedContainer } from './Animations/AnimatedContainer';
 // import { FormattingUtils } from '@repo/utils';
 
 interface SubmissionModalProps {
@@ -75,7 +75,7 @@ export const SubmissionModal: React.FC<SubmissionModalProps> = ({
   const hoverBgColor = useColorModeValue('gray.50', 'gray.600');
 
   const renderContent = () => (
-    <AnimatedContainer variant="scale">
+    // <AnimatedContainer variant="scale">
       <VStack spacing={4} align="stretch">
         {error && (
           <Alert status="error" borderRadius="md">
@@ -104,7 +104,7 @@ export const SubmissionModal: React.FC<SubmissionModalProps> = ({
           </HStack>
         ))}
       </VStack>
-    </AnimatedContainer>
+    // </AnimatedContainer>
   );
 
   return (

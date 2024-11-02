@@ -492,3 +492,122 @@
 2024-10-31T19:52:20.611320Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
 2024-10-31T19:52:24.912050Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
 2024-10-31T19:52:24.912064Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:57:19.317228Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:57:19.318166Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:57:52.312519Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:57:52.312527Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:57:53.911727Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:57:53.911748Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:57:53.911789Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T19:58:00.511805Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:58:00.511814Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:58:00.912272Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:58:00.912282Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:58:00.929462Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T19:58:47.611637Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:58:47.611647Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:58:48.010771Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:58:48.010779Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:58:48.010821Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T19:58:49.011914Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T19:58:49.011922Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:58:49.011970Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T19:58:58.111852Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/main.tsx")}
+2024-10-31T19:58:58.111873Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T19:58:58.111943Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T19:59:34.412245Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
+2024-10-31T19:59:34.412262Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:03:13.212068Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T20:03:13.212089Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:03:13.811679Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/Home.tsx")}
+2024-10-31T20:03:13.811686Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:03:13.811715Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:03:20.611425Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/logs/debug/2024-11-01.log")}
+2024-10-31T20:03:20.611435Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2024-10-31T20:03:20.623876Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:03:24.211615Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/17.cookie")}
+2024-10-31T20:03:24.211624Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:03:24.912144Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/vite.config.ts.timestamp-1730405004880-359164bf03d49.mjs")}
+2024-10-31T20:03:24.912152Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:03:25.011897Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/vite.config.ts.timestamp-1730405004880-359164bf03d49.mjs")}
+2024-10-31T20:03:25.011905Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:20.912307Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/util/device.ts")}
+2024-10-31T20:04:20.912328Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:21.310813Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/util/device.ts")}
+2024-10-31T20:04:21.310821Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:21.331507Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:04:22.912144Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/util/device.ts")}
+2024-10-31T20:04:22.912159Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:22.912223Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:04:29.012041Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/util/index.ts")}
+2024-10-31T20:04:29.012050Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:33.611753Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/backend/src/logs/debug/2024-11-01.log")}
+2024-10-31T20:04:33.611790Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-backend"), path: AnchoredSystemPathBuf("apps/backend") }}))
+2024-10-31T20:04:33.611849Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:04:38.911859Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/18.cookie")}
+2024-10-31T20:04:38.911866Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:04:39.011816Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/19.cookie"), AnchoredSystemPathBuf("apps/frontend/.turbo/turbo-build.log"), AnchoredSystemPathBuf(".turbo/cookies/20.cookie")}
+2024-10-31T20:04:39.011824Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }, WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:04:39.011958Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:04:45.111559Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/vite.config.ts.timestamp-1730405085080-ac8f020344bfa.mjs")}
+2024-10-31T20:04:45.111569Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:45.113062Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:04:45.211737Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/vite.config.ts.timestamp-1730405085080-ac8f020344bfa.mjs")}
+2024-10-31T20:04:45.211746Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:04:45.211810Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:00.912121Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/dist/assets/nodecrypto-CNyr1-Gu.js"), AnchoredSystemPathBuf("apps/frontend/dist/steps"), AnchoredSystemPathBuf("apps/frontend/dist/assets/index-CXihhNjJ.js"), AnchoredSystemPathBuf("apps/frontend/dist/logo.png"), AnchoredSystemPathBuf("apps/frontend/dist/assets/purejs-DJJPunE9.js"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets/6.png"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets/4.png"), AnchoredSystemPathBuf("apps/frontend/dist/assets/utils-hDSIY_Ol.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets/7.png"), AnchoredSystemPathBuf("apps/frontend/dist/assets/webcrypto-B6CeV8M8.js"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets/5.png"), AnchoredSystemPathBuf("apps/frontend/dist/be_better.svg"), AnchoredSystemPathBuf("apps/frontend/dist/icon.png"), AnchoredSystemPathBuf("apps/frontend/dist/steps/1.svg"), AnchoredSystemPathBuf("apps/frontend/dist/steps/2.svg"), AnchoredSystemPathBuf("apps/frontend/dist/vite.svg"), AnchoredSystemPathBuf("apps/frontend/dist/ecology-bag-with-leaves.png"), AnchoredSystemPathBuf("apps/frontend/dist/b3tr-token.svg"), AnchoredSystemPathBuf("apps/frontend/dist/steps/3.svg"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets/3.png"), AnchoredSystemPathBuf("apps/frontend/dist/ServareAssets/UltimateSolution.png"), AnchoredSystemPathBuf("apps/frontend/dist/assets/ccip-dxIIXXuK.js"), AnchoredSystemPathBuf("apps/frontend/dist/index.html"), AnchoredSystemPathBuf("apps/frontend/dist/assets/index-D-xXRvs4.js"), AnchoredSystemPathBuf("apps/frontend/dist/vebetter_dark.svg"), AnchoredSystemPathBuf("apps/frontend/dist/vebetterdao-logo.svg")}
+2024-10-31T20:05:00.912138Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:05:00.951183Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:01.012376Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/dist/ecology-bag-with-leaves.png"), AnchoredSystemPathBuf("apps/frontend/dist/steps"), AnchoredSystemPathBuf("apps/frontend/dist/steps/1.svg"), AnchoredSystemPathBuf("apps/frontend/dist/vebetterdao-logo.svg"), AnchoredSystemPathBuf("apps/frontend/dist/vite.svg"), AnchoredSystemPathBuf("apps/frontend/dist/steps/3.svg"), AnchoredSystemPathBuf("apps/frontend/dist/b3tr-token.svg"), AnchoredSystemPathBuf("apps/frontend/dist/be_better.svg"), AnchoredSystemPathBuf("apps/frontend/dist/icon.png"), AnchoredSystemPathBuf("apps/frontend/dist/logo.png"), AnchoredSystemPathBuf("apps/frontend/dist/steps/2.svg"), AnchoredSystemPathBuf("apps/frontend/dist/vebetter_dark.svg")}
+2024-10-31T20:05:01.012385Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:05:01.012474Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:02.611916Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/dist/assets/index-Dn2WmeoR.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/utils-C9pzvBqy.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/webcrypto-DxWCZTJr.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/purejs-D5c4-BD2.js"), AnchoredSystemPathBuf("apps/frontend/dist/index.html"), AnchoredSystemPathBuf("apps/frontend/dist/assets"), AnchoredSystemPathBuf("apps/frontend/dist/assets/ccip-bwSPTUyr.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/index-CIt7NACa.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/nodecrypto-ycAzigjf.js")}
+2024-10-31T20:05:02.611931Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:05:02.620886Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:02.711287Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/dist/index.html"), AnchoredSystemPathBuf("apps/frontend/dist/assets/ccip-bwSPTUyr.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/nodecrypto-ycAzigjf.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/purejs-D5c4-BD2.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/webcrypto-DxWCZTJr.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/index-Dn2WmeoR.js"), AnchoredSystemPathBuf("apps/frontend/dist/assets/utils-C9pzvBqy.js")}
+2024-10-31T20:05:02.711297Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:05:02.711345Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:02.812205Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/dist/assets/index-CIt7NACa.js")}
+2024-10-31T20:05:02.812227Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:05:02.812419Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:03.210908Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cache/0fa84d0f10359dfe.tar.zst"), AnchoredSystemPathBuf(".turbo/cookies/21.cookie")}
+2024-10-31T20:05:03.210915Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:05:03.311644Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cache/0fa84d0f10359dfe.tar.zst"), AnchoredSystemPathBuf("apps/frontend/.turbo/turbo-build.log"), AnchoredSystemPathBuf(".turbo/cache/0fa84d0f10359dfe-meta.json")}
+2024-10-31T20:05:03.311653Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }, WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:05:03.311696Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:05:11.311980Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/22.cookie")}
+2024-10-31T20:05:11.311988Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:05:11.811507Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/vite.config.ts.timestamp-1730405111778-f3c8fdd91f58.mjs")}
+2024-10-31T20:05:11.811516Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:05:11.911353Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/vite.config.ts.timestamp-1730405111778-f3c8fdd91f58.mjs")}
+2024-10-31T20:05:11.911364Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:06:02.112179Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
+2024-10-31T20:06:02.112217Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:06:02.149927Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:06:02.211407Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
+2024-10-31T20:06:02.211421Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:06:02.211498Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:07:04.811654Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
+2024-10-31T20:07:04.811668Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:07:45.212141Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
+2024-10-31T20:07:45.212161Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:07:46.312403Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/frontend/src/App.tsx")}
+2024-10-31T20:07:46.312414Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:07:46.312459Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:15:09.899576Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".DS_Store"), AnchoredSystemPathBuf(".yarn/.DS_Store")}
+2024-10-31T20:15:09.899657Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:15:30.096157Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/.DS_Store"), AnchoredSystemPathBuf("apps/frontend/.DS_Store"), AnchoredSystemPathBuf(".DS_Store"), AnchoredSystemPathBuf("apps/backend/.DS_Store")}
+2024-10-31T20:15:30.096174Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }, WorkspacePackage { name: Other("x-dapp-backend"), path: AnchoredSystemPathBuf("apps/backend") }, WorkspacePackage { name: Other("x-dapp-frontend"), path: AnchoredSystemPathBuf("apps/frontend") }}))
+2024-10-31T20:15:30.107969Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-10-31T20:16:37.996059Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/.DS_Store"), AnchoredSystemPathBuf(".DS_Store")}
+2024-10-31T20:16:37.996135Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:16:43.096213Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".DS_Store")}
+2024-10-31T20:16:43.096241Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T20:37:09.196750Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".DS_Store")}
+2024-10-31T20:37:09.196776Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T23:12:19.613073Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".DS_Store")}
+2024-10-31T23:12:19.614380Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T23:12:24.597181Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".DS_Store")}
+2024-10-31T23:12:24.597194Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-10-31T23:43:59.995393Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".DS_Store")}
+2024-10-31T23:43:59.995420Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))

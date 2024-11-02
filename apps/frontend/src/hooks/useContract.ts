@@ -166,6 +166,7 @@ export const useContract = (
 
             return {
               txid: tx.txid,
+              // contract,
               receipt,
               decoded: (receipt?.outputs?.[0]?.events?.[0] as unknown as ConnexEvent)?.decoded,
             };

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingBag, Package, Activity } from 'lucide-react';
-import { AnimatedContainer } from '../Animations/AnimatedContainer';
+// import { AnimatedContainer } from '../Animations/AnimatedContainer';
 
 export const Instructions: React.FC = () => {
   const navigate = useNavigate();
@@ -37,13 +37,13 @@ export const Instructions: React.FC = () => {
   ];
 
   return (
-    <AnimatedContainer
-      variant="slide"
-      staggerChildren
-      staggerDelay={0.1}
-      animateOnScroll
-      threshold={0.2}
-    >
+    // <AnimatedContainer
+    //   variant="slide"
+    //   staggerChildren
+    //   staggerDelay={0.1}
+    //   animateOnScroll
+    //   threshold={0.2}
+    // >
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
         {instructions.map((instruction) => (
           <Button
@@ -74,6 +74,6 @@ export const Instructions: React.FC = () => {
           </Button>
         ))}
       </SimpleGrid>
-    </AnimatedContainer>
+    // </AnimatedContainer>
   );
 };

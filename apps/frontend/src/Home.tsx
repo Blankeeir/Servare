@@ -4,7 +4,7 @@ import { Box, Container, VStack, SimpleGrid, useColorModeValue } from '@chakra-u
 import { InfoCard } from './components/InfoCard';
 import { Instructions } from './components/Instructions';
 import { MarketplacePreview } from './components/MarketPlacePreview';
-import { AnimatedContainer } from './components/Animations/AnimatedContainer';
+// import { AnimatedContainer } from './components/Animations/AnimatedContainer';
 
 export const Home: React.FC = () => {
   const bgColor = useColorModeValue('gray.50', 'gray.900');
@@ -12,12 +12,12 @@ export const Home: React.FC = () => {
   return (
     <Box bg={bgColor} minH="100%">
       <Container maxW="container.xl" py={8}>
-        <AnimatedContainer
+        {/* <AnimatedContainer
           variant="slide"
           staggerChildren
           staggerDelay={0.2}
           animateOnScroll
-        >
+        > */}
           <VStack spacing={8} w="full">
             {/* InfoCard Section */}
             <Box w="full">
@@ -36,7 +36,7 @@ export const Home: React.FC = () => {
               </SimpleGrid>
             </Box>
           </VStack>
-        </AnimatedContainer>
+        {/* </AnimatedContainer> */}
       </Container>
     </Box>
   );

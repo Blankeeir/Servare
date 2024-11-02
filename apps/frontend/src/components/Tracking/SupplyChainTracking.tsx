@@ -23,7 +23,7 @@ import { Search } from 'lucide-react';
 import { useSupplyChain } from '../../hooks/useSupplyChain';
 import { TrackingHistory } from './TrackingHistory';
 import { TrackingForm } from './TrackingForm';
-import { AnimatedContainer } from '../Animations/AnimatedContainer';
+// import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { useWallet } from '@vechain/dapp-kit-react';
 import { chakra } from '@chakra-ui/react';
 import { TrackingData } from '../../util';
@@ -48,7 +48,7 @@ export const SupplyChainTracking: React.FC = () => {
 
   return (
     <Container maxW="container.xl" py={8}>
-      <AnimatedContainer>
+      {/* <AnimatedContainer> */}
         <VStack spacing={8} align="stretch">
           {/* Header */}
           <MotionBox
@@ -136,7 +136,7 @@ export const SupplyChainTracking: React.FC = () => {
             </Box>
           )}
         </VStack>
-      </AnimatedContainer>
+      {/* </AnimatedContainer> */}
     </Container>
   );
 };

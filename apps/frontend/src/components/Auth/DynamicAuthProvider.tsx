@@ -30,7 +30,7 @@ export const DynamicAuthProvider: React.FC<DynamicAuthProviderProps> = ({ childr
       settings={{
         environmentId: '714fe82f-7dd8-4c30-848b-28c05ad0788e',
         walletConnectors: [EthereumWalletConnectors],
-        overrides: { evmNetworks }
+        // overrides: { evmNetworks }
       }}
     >
       {children}

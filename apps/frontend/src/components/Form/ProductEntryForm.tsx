@@ -16,7 +16,7 @@ import {
   NumberDecrementStepper,
   Text,
   // Icon,
-  useColorModeValue,
+  // useColorModeValue,
   // Button,
   Box,
   // shouldForwardProp,
@@ -32,7 +32,7 @@ import { useVeChain } from '../../hooks/useVeChain';
 import { useToast } from '../../hooks/useToast';
 import { useTransactions } from '../../hooks/useTransactions';
 import { useContract } from '../../hooks/useContract';
-import { AnimatedContainer } from '../Animations/AnimatedContainer';
+// import { AnimatedContainer } from '../Animations/AnimatedContainer';
 import { Dropzone } from '../Dropzone';
 import { SERVARE_NFT_ADDRESS } from '../../const';
 import { Product as ProductFormData } from '../../util/types';
@@ -58,7 +58,7 @@ export const ProductEntryForm: React.FC = () => {
   const { account } = useVeChain();
 
   const nftContract = useContract('ServareNFT', SERVARE_NFT_ADDRESS, ServareNFTABI.abi as AbiItem[]);
-  const bgColor = useColorModeValue('white', 'gray.700');
+  // const bgColor = useColorModeValue('white', 'gray.700');
 
   const {
     control,
@@ -155,18 +155,18 @@ export const ProductEntryForm: React.FC = () => {
   };
 
   return (
-    <AnimatedContainer
-      variant="scale"
-      bg={bgColor}
-      p={8}
-      borderRadius="xl"
-      shadow="lg"
-      maxW="3xl"
-      mx="auto"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      style={{ transition: 'all 0.3s' }}
-    >
+    // <AnimatedContainer
+    //   variant="scale"
+    //   bg={bgColor}
+    //   p={8}
+    //   borderRadius="xl"
+    //   shadow="lg"
+    //   maxW="3xl"
+    //   mx="auto"
+    //   initial={{ opacity: 0, scale: 0.95 }}
+    //   animate={{ opacity: 1, scale: 1 }}
+    //   style={{ transition: 'all 0.3s' }}
+    // >
       <form onSubmit={handleSubmit(onSubmit)}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -380,6 +380,6 @@ export const ProductEntryForm: React.FC = () => {
           </VStack>
         </motion.div>
       </form>
-    </AnimatedContainer>
+    // </AnimatedContainer>
   );
 };
